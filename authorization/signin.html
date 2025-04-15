@@ -5,18 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link rel="stylesheet" href="../styles/themes/light.css" id="theme-link">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link href="../styles/authorization/style.css" rel="stylesheet">
     <title>ChatWave | signin</title>
 </head>
 <body>
+    <button class="btn btn-outline-secondary position-fixed top-0 end-0 m-3" id="toggle-theme">
+        <i class="bi bi-moon-fill" id="theme-icon"></i>
+    </button>
+
     <!-- Toast контейнер -->
     <div class="position-fixed top-0 end-0 p-3" style="z-index: 1055">
         <!-- Успешный Toast -->
         <div id="successToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
                 <div class="toast-body">
-                    ✅ Авторизация прошла успешно!
+                    Авторизация прошла успешно!
                 </div>
                 <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
             </div>
@@ -27,7 +32,7 @@
         <div id="errorToast" class="toast align-items-start text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex flex-column w-100">
                 <div class="toast-body">
-                    ❌ Произошла ошибка. Проверьте поля формы.
+                    Произошла ошибка. Проверьте поля формы.
                     <a class="d-block mt-2 text-white text-decoration-underline" data-bs-toggle="collapse" href="#errorDetails" role="button" aria-expanded="false" aria-controls="errorDetails">
                     Показать технические детали
                     </a>
@@ -44,7 +49,7 @@
         <div id="toastNotFound" class="toast text-bg-warning border-0" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
             <div class="toast-body">
-                ⚠️ Аккаунт с такими данными не существует.
+                Аккаунт с такими данными не существует.
             </div>
             <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Закрыть"></button>
             </div>
@@ -52,32 +57,34 @@
     
     </div>
 
-    <div class="container-fluid d-flex justify-content-center align-items-center w-100 h-100">
-        <div class="container d-flex justify-content-center shadow-lg m-5 rounded">
-            <div class="container d-flex flex-column justify-content-around align-items-center py-5 ps-5">
-                <form class="needs-validation" id="signin-form" novalidate>
-                    <h1>Sign in</h1>
-                
+    <div class="container-fluid d-flex justify-content-center align-items-center w-100 min-vh-100">
+        <div class="container d-flex justify-content-center shadow-lg m-3 rounded flex-md-row flex-column p-3">
+          
+            <!-- Левая часть: форма -->
+            <div class="container d-flex flex-column justify-content-around align-items-center py-5 ps-md-5">
+                <form class="needs-validation w-100" id="signin-form" novalidate>
+                    <h1 class="text-center mb-4">Sign in</h1>
+            
                     <div class="mb-3">
                         <label for="login" class="form-label">Login</label>
                         <div class="input-group">
-                            <span class="input-group-text"><i class="bi bi-person-badge"></i></span>
+                            <span class="input-group-text">
+                                <i class="bi bi-person-badge"></i>
+                            </span>
                             <input type="text" class="form-control" id="login" name="login" minlength="3" required>
                             <div class="invalid-feedback">
                                 Login must be at least 3 characters.
                             </div>
                         </div>
                     </div>
-                
+            
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
                         <div class="input-group">
-                            <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                            <input 
-                                type="password" 
-                                class="form-control" 
-                                id="password" 
-                                name="password"
+                            <span class="input-group-text">
+                                <i class="bi bi-lock"></i>
+                            </span>
+                            <input type="password" class="form-control" id="password" name="password"
                                 pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"
                                 title="Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, and one number."
                                 required>
@@ -89,16 +96,22 @@
                             </div>
                         </div>
                     </div>
-                
-                    <button class="btn btn-primary" type="submit">Submit</button>
+        
+                    <button class="btn btn-primary text-primary w-100" type="submit">Submit</button>
                 </form>
             </div>
-            <div class="container d-flex flex-column justify-content-around align-items-center py-5 pe-5">
-                <img src="../assests/arch.png" alt="galaxy image" class="img-fluid w-50">
+    
+            <!-- Правая часть: картинка + ссылка -->
+            <div class="container d-flex flex-column justify-content-center align-items-center ps-md-5">
+                <div class="d-none d-md-block">
+                    <img id="logo" src="../assests/logo-light.png" alt="logo" class="img-fluid">
+                </div>
                 <a href="signup.html" class="text-secondary">Create an account</a>
             </div>
+    
         </div>
     </div>
+    <script src="../js/theme.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script type="module" src="../js/authorization/signin-fields-validator.js"></script>

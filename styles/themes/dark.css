@@ -1,0 +1,35 @@
+:root {
+    --bg-color: #1f1f1f;
+    --text-color: #ffffff;
+    --accent-color: #21ff5f;
+    --card-color: #a1a1a1;
+    --secondary-text: #767876;
+
+    /*Primary btn colors*/
+    --primary-bg: #21FF5F;
+    --primary-border: #21FF5F;
+    --primary-text: #767876;
+    --primary-hover-bg: #1de255;
+    --primary-hover-border: #1bd94f;
+  }
+  
+  body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+  .card {
+    background-color: var(--card-color);
+  }
+  .btn-primary {
+    background-color: var(--primary-bg) !important;
+    border-color: var(--primary-border) !important;
+    color: var(--primary-text) !important;
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--primary-hover-bg) !important;
+    border-color: var(--primary-hover-border) !important;
+  }
+  .text-primary {
+    color: var(--bg-color) !important
+  }
