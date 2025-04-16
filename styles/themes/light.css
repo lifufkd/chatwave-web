@@ -25,6 +25,13 @@
     background-color: var(--bg-color);
     color: var(--text-color);
   }
+  input {
+    color: var(--text-color) !important;
+    background-color: var(--secondary-text) !important;
+  }
+
+
+  /* Modal window */
   .modal-body {
     font-family: 'Muller', sans-serif;
     background-color: var(--bg-color);
@@ -36,9 +43,18 @@
   .modal-title {
     color: var(--text-color);
   }
-  .card {
+
+  .conversation-card {
     background-color: var(--card-color);
   }
+  .conversation-card-text {
+    color: var(--text-color) !important;
+  }
+  .unread-badge {
+    background-color: var(--accent-color) !important;
+  }
+
+  /*Buttons*/
   .btn-primary {
     background-color: var(--primary-bg) !important;
     border-color: var(--primary-border) !important;
