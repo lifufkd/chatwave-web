@@ -1,21 +1,33 @@
+@font-face {
+  font-family: 'Muller';
+  src: url('../../assests/fonts/MullerRegular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
     --bg-color: #1f1f1f;
     --text-color: #ffffff;
-    --accent-color: #21ff5f;
+    --accent-color: #47704c;
     --card-color: #a1a1a1;
     --secondary-text: #767876;
 
     /*Primary btn colors*/
-    --primary-bg: #21FF5F;
-    --primary-border: #21FF5F;
+    --primary-bg: #47704c;
+    --primary-border: #47704c;
     --primary-text: #767876;
-    --primary-hover-bg: #1de255;
-    --primary-hover-border: #1bd94f;
+    --primary-hover-bg: #59e481;
+    --primary-hover-border: #59e481;
   }
   
   body {
+    font-family: 'Muller', sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
+  }
+  input {
+    color: var(--text-color) !important;
+    background-color: var(--secondary-text) !important;
   }
   .card {
     background-color: var(--card-color);
@@ -31,5 +43,5 @@
     border-color: var(--primary-hover-border) !important;
   }
   .text-primary {
-    color: var(--bg-color) !important
+    color: var(--text-color) !important
   }
