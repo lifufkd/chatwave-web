@@ -25,6 +25,17 @@
     background-color: var(--bg-color);
     color: var(--text-color);
   }
+  .modal-body {
+    font-family: 'Muller', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+  .modal-header {
+    background-color: var(--secondary-text) !important;
+  }
+  .modal-title {
+    color: var(--text-color);
+  }
   input {
     color: var(--text-color) !important;
     background-color: var(--secondary-text) !important;
@@ -32,6 +43,8 @@
   .card {
     background-color: var(--card-color);
   }
+
+  /*Buttons*/
   .btn-primary {
     background-color: var(--primary-bg) !important;
     border-color: var(--primary-border) !important;

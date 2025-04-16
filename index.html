@@ -10,6 +10,23 @@
     <title>ChatWave | Messages</title>
 </head>
 <body>
+
+    <!-- Settings Modal window -->
+    <div class="modal fade" id="settingsModal" tabindex="-1" aria-labelledby="settingsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 20%;">
+          <div class="modal-content" style="height: 80vh;">
+            <div class="modal-header">
+              <h5 class="modal-title" id="settingsModalLabel">Settings</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Настройки будут здесь...
+            </div>
+          </div>
+        </div>
+      </div>
+
+
     <div class="container-fluid row w-100 vh-100 p-2">
         <div class="col d-flex flex-column justify-content-between align-items-center shadow-lg rounded m-2 p-2">
             <div>
@@ -20,7 +37,7 @@
                     <i class="bi bi-moon-fill" id="theme-icon"></i>
                 </button>
 
-                <button class="btn btn-outline-secondary" id="toggle-settings">
+                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#settingsModal" id="toggle-settings">
                     <i class="bi bi-gear-fill"></i>
                 </button>
             </div>

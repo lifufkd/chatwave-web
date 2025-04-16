@@ -1,4 +1,4 @@
-import {API_BASE_URL} from "../config.js";
+import {API_BASE_URL, API_TOKEN_LIFESPAN} from "../config.js";
 import {showSuccsessToast, showErrorToast, showNotFoundToast} from "../toasts.js";
 
 export function process_signin(username, password) {
@@ -14,7 +14,7 @@ export function process_signin(username, password) {
         }
         )
         .then(response => {
-            document.cookie = `access_token=${response.data.access_token}; path=/; max-age=1209500; SameSite=Lax`;
+            document.cookie = `access_token=${response.data.access_token}; path=/; max-age=${API_TOKEN_LIFESPAN}; SameSite=Lax`;
             showSuccsessToast();
             setTimeout(() => {
                 window.location.href = '/index.html';
