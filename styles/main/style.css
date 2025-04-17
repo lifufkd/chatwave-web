@@ -1,0 +1,50 @@
+.grid-split {
+    display: grid;
+    grid-template-rows: 2fr 7fr 3fr;
+    height: 100%;
+}
+.row-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+
+/* CSS */
+.avatar-container {
+    width: 100%; /* или конкретный размер, например 200px */
+    aspect-ratio: 1/1; /* квадратная форма */
+    overflow: hidden; /* обрезает всё, что выходит за границы */
+    border-radius: 50%; /* делает контейнер круглым */
+    position: relative; /* для точного позиционирования изображения */
+  }
+  
+  .avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* изображение заполняет контейнер без искажений */
+    border-radius: 50%; /* дополнительно обеспечивает круглую форму */
+    display: block; /* убирает отступы */
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+.unread-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    min-width: 1.5rem;
+    height: 1.5rem;
+    padding: 0; /* убираем лишний padding */
+    border-radius: 50%;
+    line-height: 1;
+  }
+  
+  /* Если число двузначное, чуть увеличиваем размер */
+  .unread-badge:has(:not(:empty)):not(:empty):not(:has(:only-child)):not(:has(:only-child:empty)) {
+    min-width: 1.8rem;
+  }
+  

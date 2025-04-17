@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles/themes/light.css" id="theme-link">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/themes/light.css" id="theme-link">
+    <link href="styles/main/style.css">
     <title>ChatWave | Messages</title>
 </head>
 <body>
@@ -20,15 +21,74 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              Настройки будут здесь...
+                <button class="btn btn-primary w-100" data-bs-dismiss="modal" id="openProfileBtn">
+                    Профиль
+                </button>
             </div>
           </div>
         </div>
-      </div>
+    </div>
 
+    <!-- My Profile Modal Window -->
+    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 20%;">
+          <div class="modal-content" style="height: 80vh;">
+            <div class="modal-header d-flex align-items-center gap-2">
+            <img
+            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsuperstarsbio.com%2Fwp-content%2Fuploads%2F2019%2F01%2FRyan-Gosling.jpg&f=1"
+            alt="Avatar"
+            class="img-fluid rounded-circle"
+            style="object-fit: cover; width: 50px; height: 50px;" 
+            id="my-profile-avatar"/>
+              <h5 class="modal-title mb-0" id="my-profile-nickname">Nickname</h5>
+              <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex flex-column gap-2">
+      
+              <div id="my-profile-login"><strong>Login:</strong> user_login</div>
+              <div id="my-profile-bio"><strong>Bio:</strong> Enthusiastic developer & coffee lover ☕</div>
+              <div id="my-profile-birthday"><strong>Birthday:</strong> 12 March 1997</div>
+              <div id="my-profile-last-online"><strong>Last online:</strong> 15 April 2025, 13:45</div>
+              <div id="my-profile-created-at"><strong>Created at:</strong> 10 January 2024, 08:23</div>
+              <div id="my-profile-updated-at"><strong>Updated at:</strong> 28 March 2025, 21:10</div>
+      
+              <div class="mt-auto">
+                <button class="btn btn-primary w-100" id="edit-profile-button">Edit Profile</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!-- Profile Modal Window -->
+    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 20%;">
+          <div class="modal-content" style="height: 80vh;">
+            <div class="modal-header d-flex align-items-center gap-2">
+            <img
+            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsuperstarsbio.com%2Fwp-content%2Fuploads%2F2019%2F01%2FRyan-Gosling.jpg&f=1"
+            alt="Avatar"
+            class="img-fluid rounded-circle"
+            style="object-fit: cover; width: 50px; height: 50px;" 
+            id="profile-avatar"/>
+              <h5 class="modal-title mb-0" id="profile-nickname">Nickname</h5>
+              <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex flex-column gap-2">
+      
+              <div id="profile-login"><strong>Login:</strong> user_login</div>
+              <div id="profile-bio"><strong>Bio:</strong> Enthusiastic developer & coffee lover ☕</div>
+              <div id="profile-birthday"><strong>Birthday:</strong> 12 March 1997</div>
+              <div id="profile-last-online"><strong>Last online:</strong> 15 April 2025, 13:45</div>
+              <div id="profile-created-at"><strong>Created at:</strong> 10 January 2024, 08:23</div>
+
+            </div>
+          </div>
+        </div>
+    </div> 
 
     <div class="container-fluid row w-100 vh-100 p-2">
-        <div class="col d-flex flex-column justify-content-between align-items-center shadow rounded m-2 p-2">
+        <div class="col d-flex flex-column justify-content-between align-items-center shadow rounded p-2">
             <div>
                 <img id="logo" src="assests/logo-light.png" alt="logo" class="img-fluid">
             </div>
@@ -43,7 +103,7 @@
             </div>
         </div>
 
-        <div class="col-3 d-flex flex-column justify-content-start align-items-center shadow rounded m-2 p-2">
+        <div class="col-3 d-flex flex-column justify-content-start align-items-center shadow rounded p-2">
             <div class="input-group rounded">
                 <span class="input-group-text bg-transparent border-end-0">
                   <i class="bi bi-search"></i>
@@ -60,44 +120,156 @@
             </div>
 
             <!--Conversation card-->
-
-            <!--Conversation card unread-->
-            <div class="card conversation-card mb-3 w-100">
-              <div class="card-body">
-                <div class="d-flex align-items-center flex-column flex-sm-row">
-
-                  <div class="mb-2 mb-sm-0 me-sm-3">
-                    <div style="width: 3rem; height: 3rem;">
-                      <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsuperstarsbio.com%2Fwp-content%2Fuploads%2F2019%2F01%2FRyan-Gosling.jpg&f=1&nofb=1&ipt=2ff0fae0d8bc41add1607bfc9e9348ea4839a53b6ce68e4bcb7b7657d2aeb9c4" alt="Avatar" class="img-fluid rounded-circle" style="object-fit: cover; width: 100%; height: 100%;">
+            <div class="card conversation-card mb-3 w-100 shadow-sm border-0">
+                <div class="card-body py-3">
+                  <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-3">
+              
+                    <!-- Аватар -->
+                    <div class="flex-shrink-0 mx-auto mx-md-0">
+                      <div style="width: 3rem; height: 3rem;">
+                        <img
+                          src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsuperstarsbio.com%2Fwp-content%2Fuploads%2F2019%2F01%2FRyan-Gosling.jpg&f=1"
+                          alt="Avatar"
+                          class="img-fluid rounded-circle"
+                          style="object-fit: cover; width: 100%; height: 100%;" /
+                          id="conversation-avatar">
+                      </div>
                     </div>
+              
+                    <!-- Контент -->
+                    <div class="flex-grow-1 text-center text-md-start overflow-hidden">
+                      <h6 class="mb-1 text-truncate" style="max-width: 100%;" id="conversation-name">Saved Messages</h6>
+                      <p class="mb-0 small text-muted text-truncate" style="max-width: 100%;" id="conversation-last-message-content">
+                        This is a very long message preview that will be truncated on small screens.
+                      </p>
+                    </div>
+              
+                    <!-- Дата и бейдж -->
+                    <div class="text-center text-md-end d-flex flex-column align-items-center align-items-md-end ms-md-auto">
+                      <small class="text-muted" id="conversation-last-message-date">09.04.2025</small>
+                    </div>
+              
                   </div>
-                  <div class="text-center text-sm-start conversation-card-text">
-                    <h6 class="card-title mb-0">Saved Messages</h6>
-                    <p class="card-text small">Photo</p>
-                  </div>
-                  <div class="ms-auto mt-2 mt-sm-0 d-flex flex-column">
-                    <div class="small text-center text-sm-end conversation-card-text">
-                      09.04.2025
-                    </div> 
-                    <div class="d-flex align-items-center justify-content-center justify-content-sm-end">
-                      <span class="badge rounded-circle unread-badge" style="width: 1.5rem; height: 1.5rem;">
+                </div>
+            </div>
+            <!--Conversation card unread-->
+            <div class="card conversation-card mb-3 w-100 shadow-sm border-0">
+                <div class="card-body py-3">
+                  <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-3">
+              
+                    <!-- Аватар -->
+                    <div class="flex-shrink-0 mx-auto mx-md-0">
+                      <div style="width: 3rem; height: 3rem;">
+                        <div class="avatar-container">
+                            <img 
+                                src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsuperstarsbio.com%2Fwp-content%2Fuploads%2F2019%2F01%2FRyan-Gosling.jpg&f=1" 
+                                class="avatar img-fluid" 
+                                alt="User avatar"
+                            >
+                        </div>
+                      </div>
+                    </div>
+              
+                    <!-- Контент -->
+                    <div class="flex-grow-1 text-center text-md-start overflow-hidden">
+                      <h6 class="mb-1 text-truncate" style="max-width: 100%;" id="conversation-name">Saved Messages</h6>
+                      <p class="mb-0 small text-muted text-truncate" style="max-width: 100%;" id="conversation-last-message-content">
+                        This is a very long message preview that will be truncated on small screens.
+                      </p>
+                    </div>
+              
+                    <!-- Дата и бейдж -->
+                    <div class="text-center text-md-end d-flex flex-column align-items-center align-items-md-end ms-md-auto">
+                      <small class="text-muted" id="conversation-last-message-date">09.04.2025</small>
+                      <span class="badge unread-badge mt-1 rounded-circle d-flex align-items-center justify-content-center"
+                            style="min-width: 1.5rem; height: 1.5rem; font-size: 0.75rem;"
+                            id="conversation-unread-quantity">
                         5
                       </span>
                     </div>
+              
                   </div>
-
                 </div>
-              </div>
             </div>
-            
+              
+              
         </div>
 
-        <div class="col-8 d-flex flex-column justify-content-start align-items-center shadow rounded m-2 p-2">
-
+        <div class="col-8 grid-split shadow rounded p-2">
+            <div class="d-flex justify-content-between align-items-center w-25">
+                <!-- Левый блок -->
+                <div class="d-flex align-items-center gap-2">
+                    <div class="avatar-container">
+                        <img 
+                            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsuperstarsbio.com%2Fwp-content%2Fuploads%2F2019%2F01%2FRyan-Gosling.jpg&f=1" 
+                            class="avatar img-fluid" 
+                            alt="User avatar"
+                        >
+                    </div>
+                    <div>
+                        <div class="text-white fw-bold">DARSHAN ZALAVADIYA</div>
+                        <div class="status">ONLINE</div>
+                    </div>
+                </div>
+            
+                <!-- Правый блок -->
+                <div class="d-flex align-items-center gap-3">
+                    <i class="bi bi-telephone-forward-fill"></i>
+                    <i class="bi bi-camera-video-fill"></i>
+                    <i class="bi bi-three-dots-vertical"></i>
+                </div>
+            </div>
+            <div class="w-75">
+                <!-- Левый блок -->
+                <div class="d-flex align-items-center gap-2">
+                    <div class="avatar-container">
+                        <img 
+                            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsuperstarsbio.com%2Fwp-content%2Fuploads%2F2019%2F01%2FRyan-Gosling.jpg&f=1" 
+                            class="avatar img-fluid" 
+                            alt="User avatar"
+                        >
+                    </div>
+                    <div>
+                        <div class="text-white fw-bold">DARSHAN ZALAVADIYA</div>
+                        <div class="status">ONLINE</div>
+                    </div>
+                </div>
+            
+                <!-- Правый блок -->
+                <div class="d-flex align-items-center gap-3">
+                    <i class="bi bi-telephone-forward-fill"></i>
+                    <i class="bi bi-camera-video-fill"></i>
+                    <i class="bi bi-three-dots-vertical"></i>
+                </div>
+            </div>
+            <div class="w-25">
+                <!-- Левый блок -->
+                <div class="d-flex align-items-center gap-2">
+                    <div class="avatar-container">
+                        <img 
+                            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsuperstarsbio.com%2Fwp-content%2Fuploads%2F2019%2F01%2FRyan-Gosling.jpg&f=1" 
+                            class="avatar img-fluid" 
+                            alt="User avatar"
+                        >
+                    </div>
+                    <div>
+                        <div class="text-white fw-bold">DARSHAN ZALAVADIYA</div>
+                        <div class="status">ONLINE</div>
+                    </div>
+                </div>
+            
+                <!-- Правый блок -->
+                <div class="d-flex align-items-center gap-3">
+                    <i class="bi bi-telephone-forward-fill"></i>
+                    <i class="bi bi-camera-video-fill"></i>
+                    <i class="bi bi-three-dots-vertical"></i>
+                </div>
+            </div>
         </div>
     </div>
     
     <script src="js/theme.js"></script>
+    <script src="js/main/modal-windows.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
