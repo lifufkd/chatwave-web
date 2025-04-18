@@ -6,16 +6,15 @@
 }
 
 :root {
-    --bg-color: #1f1f1f;
+    --bg-color: #1a1d21;
+    --bg-secondary-color: #212529;
     --text-color: #ffffff;
-    --accent-color: #47704c;
-    --card-color: #a1a1a1;
-    --secondary-text: #767876;
-
-    /*Primary btn colors*/
-    --primary-bg: #47704c;
-    --primary-border: #47704c;
-    --primary-text: #767876;
+    --accent-color: #4c9655;
+    --card-color: #343a40;
+    --unread-message-color: #343a40;
+    --read-message-color: #495057;
+    --secondary-text: #aaacaa;
+    
     --primary-hover-bg: #59e481;
     --primary-hover-border: #59e481;
   }
@@ -25,9 +24,43 @@
     background-color: var(--bg-color);
     color: var(--text-color);
   }
-  input {
-    color: var(--text-color) !important;
-    background-color: var(--secondary-text) !important;
+  .input-field-style {
+    color: var(--text-color);
+    background-color: var(--card-color);
+  }
+  .input-field-style::placeholder {
+    color: var(--text-color);
+  }
+  .input-field-style:focus {
+    background-color: var(--card-color);
+    color: var(--text-color);
+    outline: none;
+    box-shadow: none;
+  }
+  .layers-style {
+    background-color: var(--bg-color);
+  }
+  .interactive-style {
+    background-color: var(--bg-secondary-color);
+  }
+
+  /* Messages */
+  .unread-message {
+    background-color: var(--unread-message-color);
+  }
+  .read-message {
+    background-color: var(--read-message-color);
+  }
+
+  /* Text */
+  .primary-text-style {
+    color: var(--text-color)
+  }
+  .secondary-text-style {
+    color: var(--secondary-text)
+  }
+  .accent-text-style {
+    color: var(--accent-color)
   }
 
   /* Modal window */
@@ -37,7 +70,7 @@
     color: var(--text-color);
   }
   .modal-header {
-    background-color: var(--secondary-text) !important;
+    background-color: var(--secondary-text);
   }
   .modal-title {
     color: var(--text-color);
@@ -46,24 +79,16 @@
   .conversation-card {
     background-color: var(--card-color);
   }
-  .conversation-card-text {
-    color: var(--text-color) !important;
-  }
   .unread-badge {
-    background-color: var(--accent-color) !important;
+    background-color: var(--accent-color);
   }
 
   /*Buttons*/
   .btn-primary {
-    background-color: var(--primary-bg) !important;
-    border-color: var(--primary-border) !important;
-    color: var(--primary-text) !important;
+    background-color: var(--bg-color);
+    color: var(--text-color);
   }
-  
   .btn-primary:hover {
-    background-color: var(--primary-hover-bg) !important;
-    border-color: var(--primary-hover-border) !important;
-  }
-  .text-primary {
-    color: var(--text-color) !important
+    background-color: var(--primary-hover-bg);
+    border-color: var(--primary-hover-border);
   }

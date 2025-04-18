@@ -1,107 +1,48 @@
 .grid-split {
-    display: grid;
-    grid-template-rows: 1fr 10fr 1fr; /* Пропорции 3:7:2 */
-    height: 100%;
-  }
+  display: grid;
+  grid-template-rows: 1fr 10fr 1fr; /* Пропорции 3:7:2 */
+  height: 100%;
+}
 
-  .pointer-on-hover:hover {
-    cursor: pointer;
-  }
+.pointer-on-hover:hover {
+  cursor: pointer;
+}
 
 .avatar-container {
-    width: 50px; /* фиксированный размер для мессенджера */
-    height: 50px;
-    overflow: hidden;
-    border-radius: 50%; /* круглая форма */
-    position: relative;
-    flex-shrink: 0; /* не сжимается */
-  }
+  width: 50px; /* фиксированный размер для мессенджера */
+  height: 50px;
+  overflow: hidden;
+  border-radius: 50%; /* круглая форма */
+  position: relative;
+  flex-shrink: 0; /* не сжимается */
+}
 
-  .avatar {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* заполняет контейнер без искажений */
-    border-radius: 50%; /* дополнительно для изображения */
-    display: block;
-  }
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* заполняет контейнер без искажений */
+  border-radius: 50%; /* дополнительно для изображения */
+  display: block;
+}
 
-  .chat-message {
-    max-width: 100%;
-    margin-bottom: 1rem;
-  }
-
-  .chat-message .message-bubble {
-    padding: 0.5rem 1rem;
-    border-radius: 1rem;
-    background-color: #343a40; /* тёмный фон для сообщений */
-    color: white;
-  }
-
-  .chat-message.received .message-bubble {
-    background-color: #495057; /* чуть светлее для полученных сообщений */
-  }
-
-  .chat-header {
-    background-color: #212529;
-    color: white;
-    padding: 0.5rem 1rem;
-  }
-
-  .chat-body {
-    background-color: #1a1d21; /* тёмный фон чата */
-    padding: 1rem;
-    min-height: 400px;
-    overflow-y: auto; /* прокрутка сообщений */
-  }
-
-  .chat-footer {
-    background-color: #212529;
-    padding: 0.5rem 1rem;
-    border-top: 1px solid #343a40;
-  }
-
-  .chat-input {
-    background-color: #343a40;
-    border: none;
-    border-radius: 1.5rem;
-    padding: 0.5rem 1rem;
-    color: white;
-    flex-grow: 1;
-  }
-
-  .chat-input:focus {
-    background-color: #343a40;
-    color: white;
-    outline: none;
-    box-shadow: none;
-  }
-
-  .chat-footer .btn-icon {
-    background: none;
-    border: none;
-    color: #adb5bd;
-    font-size: 1.2rem;
-    padding: 0.5rem;
-  }
-
-  .chat-footer .btn-icon:hover {
-    color: #fff;
-  }
+.chat-footer {
+  border-top: 1px solid #343a40;
+}
 
 .unread-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.75rem;
-    min-width: 1.5rem;
-    height: 1.5rem;
-    padding: 0; /* убираем лишний padding */
-    border-radius: 50%;
-    line-height: 1;
-  }
-  
-  /* Если число двузначное, чуть увеличиваем размер */
-  .unread-badge:has(:not(:empty)):not(:empty):not(:has(:only-child)):not(:has(:only-child:empty)) {
-    min-width: 1.8rem;
-  }
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  padding: 0; /* убираем лишний padding */
+  border-radius: 50%;
+  line-height: 1;
+}
+
+/* Если число двузначное, чуть увеличиваем размер */
+.unread-badge:has(:not(:empty)):not(:empty):not(:has(:only-child)):not(:has(:only-child:empty)) {
+  min-width: 1.8rem;
+}
   
