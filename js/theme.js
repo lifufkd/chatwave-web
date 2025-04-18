@@ -6,11 +6,21 @@ const themeIcon = document.getElementById('theme-icon');
 function setTheme(theme) {
   themeLink.href = theme === 'dark' ? '../styles/themes/dark.css' : '../styles/themes/light.css';
   logo.src = theme === 'dark' ? '../assests/logo-dark.png' : '../assests/logo-light.png';
-  themeIcon.className = theme === 'dark' ? 'bi bi-sun-fill text-white' : 'bi bi-moon-fill text-dark';
+  UpdateThemeTogglerIcon(theme);
   localStorage.setItem('theme', theme);
 }
 
-function updateAllIcons(theme) {
+function UpdateThemeTogglerIcon(theme) {
+  themeIcon.classList.remove("bi-sun-fill", "bi-moon-fill");
+
+  if (theme === 'dark') {
+    themeIcon.classList.add('bi-moon-fill');
+  } else {
+    themeIcon.classList.add('bi-sun-fill');
+  }
+}
+
+function UpdateIconsColor(theme) {
   const icons = document.querySelectorAll('.bi'); // выбираем все иконки Bootstrap Icons
 
   icons.forEach(icon => {
@@ -29,7 +39,7 @@ function updateAllIcons(theme) {
 
 function toggleTheme() {
   const current = localStorage.getItem('theme') === 'dark' ? 'light' : 'dark';
-  updateAllIcons(current);
+  UpdateIconsColor(current);
   setTheme(current);
 }
 
@@ -41,10 +51,10 @@ themeToggle.addEventListener('click', toggleTheme);
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
   if (savedTheme) {
-    updateAllIcons(savedTheme);
+    UpdateIconsColor(savedTheme);
     setTheme(savedTheme);
   } else {
-    updateAllIcons(prefersDark ? 'dark' : 'light');
+    UpdateIconsColor(prefersDark ? 'dark' : 'light');
     setTheme(prefersDark ? 'dark' : 'light');
   }
 })();

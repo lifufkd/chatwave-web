@@ -1,34 +1,91 @@
 .grid-split {
     display: grid;
-    grid-template-rows: 2fr 7fr 3fr;
-    height: 100%;
-}
-.row-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    grid-template-rows: 1fr 10fr 1fr; /* Пропорции 3:7:2 */
     height: 100%;
   }
 
+  .pointer-on-hover:hover {
+    cursor: pointer;
+  }
 
-/* CSS */
 .avatar-container {
-    width: 100%; /* или конкретный размер, например 200px */
-    aspect-ratio: 1/1; /* квадратная форма */
-    overflow: hidden; /* обрезает всё, что выходит за границы */
-    border-radius: 50%; /* делает контейнер круглым */
-    position: relative; /* для точного позиционирования изображения */
+    width: 50px; /* фиксированный размер для мессенджера */
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%; /* круглая форма */
+    position: relative;
+    flex-shrink: 0; /* не сжимается */
   }
-  
+
   .avatar {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* изображение заполняет контейнер без искажений */
-    border-radius: 50%; /* дополнительно обеспечивает круглую форму */
-    display: block; /* убирает отступы */
-    position: absolute;
-    top: 0;
-    left: 0;
+    object-fit: cover; /* заполняет контейнер без искажений */
+    border-radius: 50%; /* дополнительно для изображения */
+    display: block;
+  }
+
+  .chat-message {
+    max-width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .chat-message .message-bubble {
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    background-color: #343a40; /* тёмный фон для сообщений */
+    color: white;
+  }
+
+  .chat-message.received .message-bubble {
+    background-color: #495057; /* чуть светлее для полученных сообщений */
+  }
+
+  .chat-header {
+    background-color: #212529;
+    color: white;
+    padding: 0.5rem 1rem;
+  }
+
+  .chat-body {
+    background-color: #1a1d21; /* тёмный фон чата */
+    padding: 1rem;
+    min-height: 400px;
+    overflow-y: auto; /* прокрутка сообщений */
+  }
+
+  .chat-footer {
+    background-color: #212529;
+    padding: 0.5rem 1rem;
+    border-top: 1px solid #343a40;
+  }
+
+  .chat-input {
+    background-color: #343a40;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 0.5rem 1rem;
+    color: white;
+    flex-grow: 1;
+  }
+
+  .chat-input:focus {
+    background-color: #343a40;
+    color: white;
+    outline: none;
+    box-shadow: none;
+  }
+
+  .chat-footer .btn-icon {
+    background: none;
+    border: none;
+    color: #adb5bd;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+  }
+
+  .chat-footer .btn-icon:hover {
+    color: #fff;
   }
 
 .unread-badge {

@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="styles/themes/light.css" id="theme-link">
-    <link href="styles/main/style.css">
+    <link rel="stylesheet" href="styles/main/style.css">
     <title>ChatWave | Messages</title>
 </head>
 <body>
@@ -30,7 +30,7 @@
     </div>
 
     <!-- My Profile Modal Window -->
-    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+    <div class="modal fade" id="MyProfileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" style="max-width: 20%;">
           <div class="modal-content" style="height: 80vh;">
             <div class="modal-header d-flex align-items-center gap-2">
@@ -61,7 +61,7 @@
     </div>
 
     <!-- Profile Modal Window -->
-    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+    <div class="modal fade" id="ProfileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" style="max-width: 20%;">
           <div class="modal-content" style="height: 80vh;">
             <div class="modal-header d-flex align-items-center gap-2">
@@ -88,20 +88,19 @@
     </div> 
 
     <div class="container-fluid row w-100 vh-100 p-2">
-        <div class="col d-flex flex-column justify-content-between align-items-center shadow rounded p-2">
-            <div>
-                <img id="logo" src="assests/logo-light.png" alt="logo" class="img-fluid">
+        <div class="col d-flex flex-column justify-content-between align-items-center shadow rounded p-1 p-md-2">
+            <div class="w-75 w-md-50 mx-auto">
+              <img id="logo" src="assests/logo-light.png" alt="logo" class="img-fluid">
             </div>
-            <div class="d-flex flex-column justify-content-between align-items-center">
-                <button class="btn btn-outline-secondary mb-3" id="toggle-theme">
-                    <i class="bi bi-moon-fill" id="theme-icon"></i>
-                </button>
-
-                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#settingsModal" id="toggle-settings">
-                    <i class="bi bi-gear-fill"></i>
-                </button>
+            <div class="d-flex flex-column justify-content-between align-items-center w-75 w-md-50 mx-auto">
+              <button class="btn btn-outline-secondary btn-sm mb-2" id="toggle-theme">
+                <i class="bi bi-moon-fill fs-4" id="theme-icon"></i>
+              </button>
+              <button class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#settingsModal" id="toggle-settings">
+                <i class="bi bi-gear-fill fs-4"></i>
+              </button>
             </div>
-        </div>
+          </div>
 
         <div class="col-3 d-flex flex-column justify-content-start align-items-center shadow rounded p-2">
             <div class="input-group rounded">
@@ -115,25 +114,61 @@
                   aria-label="Search"
                 >
             </div>
+
             <div class="d-flex justify-content-start align-items-center my-4 w-100">
-                <h2 class="text-start">Chats</h2>
+                <h2 class="text-start">Founded users</h2>
             </div>
 
-            <!--Conversation card-->
-            <div class="card conversation-card mb-3 w-100 shadow-sm border-0">
+            <div class="card conversation-card mb-3 w-100 shadow-sm border-0 pointer-on-hover">
                 <div class="card-body py-3">
                   <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-3">
               
                     <!-- Аватар -->
                     <div class="flex-shrink-0 mx-auto mx-md-0">
-                      <div style="width: 3rem; height: 3rem;">
-                        <img
-                          src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsuperstarsbio.com%2Fwp-content%2Fuploads%2F2019%2F01%2FRyan-Gosling.jpg&f=1"
-                          alt="Avatar"
-                          class="img-fluid rounded-circle"
-                          style="object-fit: cover; width: 100%; height: 100%;" /
-                          id="conversation-avatar">
-                      </div>
+                        <div class="avatar-container me-2">
+                            <img 
+                            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsuperstarsbio.com%2Fwp-content%2Fuploads%2F2019%2F01%2FRyan-Gosling.jpg&f=1" 
+                            class="avatar" 
+                            alt="User avatar"
+                            id="conversation-avatar">
+                        </div>
+                    </div>
+              
+                    <!-- Контент -->
+                    <div class="flex-grow-1 text-center text-md-start overflow-hidden">
+                      <h6 class="mb-1 text-truncate" style="max-width: 100%;" id="conversation-name">Saved Messages</h6>
+                      <p class="mb-0 small text-muted text-truncate" style="max-width: 100%;" id="conversation-last-message-content">
+                        This is a very long message preview that will be truncated on small screens.
+                      </p>
+                    </div>
+              
+                    <!-- Дата и бейдж -->
+                    <div class="text-center text-md-end d-flex flex-column align-items-center align-items-md-end ms-md-auto">
+                      <small class="text-muted" id="conversation-last-message-date">09.04.2025</small>
+                    </div>
+              
+                  </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-start align-items-center my-4 w-100">
+                <h2 class="text-start">Chats</h2>
+            </div>
+
+            <!--Conversation card-->
+            <div class="card conversation-card mb-3 w-100 shadow-sm border-0 pointer-on-hover">
+                <div class="card-body py-3">
+                  <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-3">
+              
+                    <!-- Аватар -->
+                    <div class="flex-shrink-0 mx-auto mx-md-0">
+                        <div class="avatar-container me-2">
+                            <img 
+                            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsuperstarsbio.com%2Fwp-content%2Fuploads%2F2019%2F01%2FRyan-Gosling.jpg&f=1" 
+                            class="avatar" 
+                            alt="User avatar"
+                            id="conversation-avatar">
+                        </div>
                     </div>
               
                     <!-- Контент -->
@@ -153,19 +188,19 @@
                 </div>
             </div>
             <!--Conversation card unread-->
-            <div class="card conversation-card mb-3 w-100 shadow-sm border-0">
+            <div class="card conversation-card mb-3 w-100 shadow-sm border-0 pointer-on-hover">
                 <div class="card-body py-3">
                   <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-3">
               
                     <!-- Аватар -->
                     <div class="flex-shrink-0 mx-auto mx-md-0">
                       <div style="width: 3rem; height: 3rem;">
-                        <div class="avatar-container">
+                        <div class="avatar-container me-2">
                             <img 
-                                src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsuperstarsbio.com%2Fwp-content%2Fuploads%2F2019%2F01%2FRyan-Gosling.jpg&f=1" 
-                                class="avatar img-fluid" 
-                                alt="User avatar"
-                            >
+                            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsuperstarsbio.com%2Fwp-content%2Fuploads%2F2019%2F01%2FRyan-Gosling.jpg&f=1" 
+                            class="avatar" 
+                            alt="User avatar"
+                            id="conversation-avatar">
                         </div>
                       </div>
                     </div>
@@ -190,81 +225,216 @@
               
                   </div>
                 </div>
-            </div>
-              
-              
+            </div>   
         </div>
 
-        <div class="col-8 grid-split shadow rounded p-2">
-            <div class="d-flex justify-content-between align-items-center w-25">
-                <!-- Левый блок -->
-                <div class="d-flex align-items-center gap-2">
-                    <div class="avatar-container">
+        <div class="col-8 grid-split shadow rounded p-0">
+            <!-- Заголовок чата -->
+            <div class="chat-header d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-center aligin-items-center pointer-on-hover" data-bs-toggle="modal" data-bs-target="#ProfileModal" id="toggle-user-profile">
+                    <div class="avatar-container me-2">
                         <img 
-                            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsuperstarsbio.com%2Fwp-content%2Fuploads%2F2019%2F01%2FRyan-Gosling.jpg&f=1" 
-                            class="avatar img-fluid" 
-                            alt="User avatar"
-                        >
+                        src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsuperstarsbio.com%2Fwp-content%2Fuploads%2F2019%2F01%2FRyan-Gosling.jpg&f=1" 
+                        class="avatar" 
+                        alt="User avatar">
                     </div>
-                    <div>
-                        <div class="text-white fw-bold">DARSHAN ZALAVADIYA</div>
-                        <div class="status">ONLINE</div>
+                    <div class="mt-1">
+                        <h5 class="mb-0">Darshan Zalavadiya</h5>
+                        <small class="text-success">Online</small>
                     </div>
                 </div>
-            
-                <!-- Правый блок -->
                 <div class="d-flex align-items-center gap-3">
-                    <i class="bi bi-telephone-forward-fill"></i>
-                    <i class="bi bi-camera-video-fill"></i>
-                    <i class="bi bi-three-dots-vertical"></i>
+                    <i class="bi bi-telephone-forward fs-4"></i>
+                    <i class="bi bi-camera-video fs-4"></i>
+                    <div class="dropdown">
+                        <i class="bi bi-three-dots-vertical fs-4" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" id="delete-conversation">Delete chat</a></li>
+                            <li><a class="dropdown-item" id="clear-conversation">Clear chat</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div class="w-75">
-                <!-- Левый блок -->
-                <div class="d-flex align-items-center gap-2">
-                    <div class="avatar-container">
-                        <img 
-                            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsuperstarsbio.com%2Fwp-content%2Fuploads%2F2019%2F01%2FRyan-Gosling.jpg&f=1" 
-                            class="avatar img-fluid" 
-                            alt="User avatar"
-                        >
-                    </div>
-                    <div>
-                        <div class="text-white fw-bold">DARSHAN ZALAVADIYA</div>
-                        <div class="status">ONLINE</div>
-                    </div>
+
+            <!-- Тело чата -->
+            <div class="chat-body flex-grow-1">
+                <div class="chat-message d-flex align-items-center received">
+                  <div class="avatar-container me-2">
+                    <img src="https://via.placeholder.com/40" class="avatar" alt="User avatar">
+                  </div>
+                  <div class="message-bubble d-flex flex-column">
+                    <span class="text-start w-100">Hello, Darshan</span>
+                    <small class="text-muted ms-2 text-end w-100">9:30 am</small>
+                  </div>
                 </div>
-            
-                <!-- Правый блок -->
-                <div class="d-flex align-items-center gap-3">
-                    <i class="bi bi-telephone-forward-fill"></i>
-                    <i class="bi bi-camera-video-fill"></i>
-                    <i class="bi bi-three-dots-vertical"></i>
+                <div class="chat-message d-flex align-items-center sent justify-content-end">
+                  <div class="avatar-container me-2">
+                    <img src="https://via.placeholder.com/40" class="avatar" alt="User avatar">
+                  </div>
+                  <div class="message-bubble d-flex flex-column">
+                    <span class="text-start w-100">Hello</span>
+                    <small class="text-muted ms-2 text-end w-100">9:31 am</small>
+                  </div>
                 </div>
+                <div class="chat-message d-flex align-items-center received">
+                    <div class="avatar-container me-2">
+                      <img src="https://via.placeholder.com/40" class="avatar" alt="User avatar">
+                    </div>
+                    <div class="message-bubble d-flex flex-column">
+                      <span class="text-start w-100">Hello, Darshan</span>
+                      <small class="text-muted ms-2 text-end w-100">9:30 am</small>
+                    </div>
+                  </div>
+                  <div class="chat-message d-flex align-items-center sent justify-content-end">
+                    <div class="avatar-container me-2">
+                      <img src="https://via.placeholder.com/40" class="avatar" alt="User avatar">
+                    </div>
+                    <div class="message-bubble d-flex flex-column">
+                      <span class="text-start w-100">Hello</span>
+                      <small class="text-muted ms-2 text-end w-100">9:31 am</small>
+                    </div>
+                  </div>
+                  <div class="chat-message d-flex align-items-center received">
+                    <div class="avatar-container me-2">
+                      <img src="https://via.placeholder.com/40" class="avatar" alt="User avatar">
+                    </div>
+                    <div class="message-bubble d-flex flex-column">
+                      <span class="text-start w-100">Hello, Darshan</span>
+                      <small class="text-muted ms-2 text-end w-100">9:30 am</small>
+                    </div>
+                  </div>
+                  <div class="chat-message d-flex align-items-center sent justify-content-end">
+                    <div class="avatar-container me-2">
+                      <img src="https://via.placeholder.com/40" class="avatar" alt="User avatar">
+                    </div>
+                    <div class="message-bubble d-flex flex-column">
+                      <span class="text-start w-100">Hello</span>
+                      <small class="text-muted ms-2 text-end w-100">9:31 am</small>
+                    </div>
+                  </div>
+                  <div class="chat-message d-flex align-items-center received">
+                    <div class="avatar-container me-2">
+                      <img src="https://via.placeholder.com/40" class="avatar" alt="User avatar">
+                    </div>
+                    <div class="message-bubble d-flex flex-column">
+                      <span class="text-start w-100">Hello, Darshan</span>
+                      <small class="text-muted ms-2 text-end w-100">9:30 am</small>
+                    </div>
+                  </div>
+                  <div class="chat-message d-flex align-items-center sent justify-content-end">
+                    <div class="avatar-container me-2">
+                      <img src="https://via.placeholder.com/40" class="avatar" alt="User avatar">
+                    </div>
+                    <div class="message-bubble d-flex flex-column">
+                      <span class="text-start w-100">Hello</span>
+                      <small class="text-muted ms-2 text-end w-100">9:31 am</small>
+                    </div>
+                  </div>
+                  <div class="chat-message d-flex align-items-center received">
+                    <div class="avatar-container me-2">
+                      <img src="https://via.placeholder.com/40" class="avatar" alt="User avatar">
+                    </div>
+                    <div class="message-bubble d-flex flex-column">
+                      <span class="text-start w-100">Hello, Darshan</span>
+                      <small class="text-muted ms-2 text-end w-100">9:30 am</small>
+                    </div>
+                  </div>
+                  <div class="chat-message d-flex align-items-center sent justify-content-end">
+                    <div class="avatar-container me-2">
+                      <img src="https://via.placeholder.com/40" class="avatar" alt="User avatar">
+                    </div>
+                    <div class="message-bubble d-flex flex-column">
+                      <span class="text-start w-100">Hello</span>
+                      <small class="text-muted ms-2 text-end w-100">9:31 am</small>
+                    </div>
+                  </div>
+                  <div class="chat-message d-flex align-items-center received">
+                    <div class="avatar-container me-2">
+                      <img src="https://via.placeholder.com/40" class="avatar" alt="User avatar">
+                    </div>
+                    <div class="message-bubble d-flex flex-column">
+                      <span class="text-start w-100">Hello, Darshan</span>
+                      <small class="text-muted ms-2 text-end w-100">9:30 am</small>
+                    </div>
+                  </div>
+                  <div class="chat-message d-flex align-items-center sent justify-content-end">
+                    <div class="avatar-container me-2">
+                      <img src="https://via.placeholder.com/40" class="avatar" alt="User avatar">
+                    </div>
+                    <div class="message-bubble d-flex flex-column">
+                      <span class="text-start w-100">Hello</span>
+                      <small class="text-muted ms-2 text-end w-100">9:31 am</small>
+                    </div>
+                  </div>
+                  <div class="chat-message d-flex align-items-center received">
+                    <div class="avatar-container me-2">
+                      <img src="https://via.placeholder.com/40" class="avatar" alt="User avatar">
+                    </div>
+                    <div class="message-bubble d-flex flex-column">
+                      <span class="text-start w-100">Hello, Darshan</span>
+                      <small class="text-muted ms-2 text-end w-100">9:30 am</small>
+                    </div>
+                  </div>
+                  <div class="chat-message d-flex align-items-center sent justify-content-end">
+                    <div class="avatar-container me-2">
+                      <img src="https://via.placeholder.com/40" class="avatar" alt="User avatar">
+                    </div>
+                    <div class="message-bubble d-flex flex-column">
+                      <span class="text-start w-100">Hello</span>
+                      <small class="text-muted ms-2 text-end w-100">9:31 am</small>
+                    </div>
+                  </div>
+                  <div class="chat-message d-flex align-items-center received">
+                    <div class="avatar-container me-2">
+                      <img src="https://via.placeholder.com/40" class="avatar" alt="User avatar">
+                    </div>
+                    <div class="message-bubble d-flex flex-column">
+                      <span class="text-start w-100">Hello, Darshan</span>
+                      <small class="text-muted ms-2 text-end w-100">9:30 am</small>
+                    </div>
+                  </div>
+                  <div class="chat-message d-flex align-items-center sent justify-content-end">
+                    <div class="avatar-container me-2">
+                      <img src="https://via.placeholder.com/40" class="avatar" alt="User avatar">
+                    </div>
+                    <div class="message-bubble d-flex flex-column">
+                      <span class="text-start w-100">Hello</span>
+                      <small class="text-muted ms-2 text-end w-100">9:31 am</small>
+                    </div>
+                  </div>
+                  <div class="chat-message d-flex align-items-center received">
+                    <div class="avatar-container me-2">
+                      <img src="https://via.placeholder.com/40" class="avatar" alt="User avatar">
+                    </div>
+                    <div class="message-bubble d-flex flex-column">
+                      <span class="text-start w-100">Hello, Darshan</span>
+                      <small class="text-muted ms-2 text-end w-100">9:30 am</small>
+                    </div>
+                  </div>
+                  <div class="chat-message d-flex align-items-center sent justify-content-end">
+                    <div class="avatar-container me-2">
+                      <img src="https://via.placeholder.com/40" class="avatar" alt="User avatar">
+                    </div>
+                    <div class="message-bubble d-flex flex-column">
+                      <span class="text-start w-100">Hello</span>
+                      <small class="text-muted ms-2 text-end w-100">9:31 am</small>
+                    </div>
+                  </div>
+              </div>  
+            <!-- Панель ввода -->
+            <div class="chat-footer d-flex align-items-center">
+                <button class="btn-icon me-2" title="Attach file">
+                    <i class="bi bi-paperclip fs-4"></i>
+                </button>
+                <input type="text" class="chat-input" placeholder="Type a message...">
+                <button class="btn-icon mx-2" title="Send voice message">
+                    <i class="bi bi-mic fs-4"></i>
+                </button>
+                <button class="btn-icon" title="Send message">
+                    <i class="bi bi-send fs-4"></i>
+                </button>
             </div>
-            <div class="w-25">
-                <!-- Левый блок -->
-                <div class="d-flex align-items-center gap-2">
-                    <div class="avatar-container">
-                        <img 
-                            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsuperstarsbio.com%2Fwp-content%2Fuploads%2F2019%2F01%2FRyan-Gosling.jpg&f=1" 
-                            class="avatar img-fluid" 
-                            alt="User avatar"
-                        >
-                    </div>
-                    <div>
-                        <div class="text-white fw-bold">DARSHAN ZALAVADIYA</div>
-                        <div class="status">ONLINE</div>
-                    </div>
-                </div>
-            
-                <!-- Правый блок -->
-                <div class="d-flex align-items-center gap-3">
-                    <i class="bi bi-telephone-forward-fill"></i>
-                    <i class="bi bi-camera-video-fill"></i>
-                    <i class="bi bi-three-dots-vertical"></i>
-                </div>
-            </div>
+
         </div>
     </div>
     
