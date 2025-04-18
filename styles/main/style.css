@@ -45,4 +45,13 @@
 .unread-badge:has(:not(:empty)):not(:empty):not(:has(:only-child)):not(:has(:only-child:empty)) {
   min-width: 1.8rem;
 }
+
+.custom-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  padding: 0.5rem;
+  opacity: 0.8;
+}
   
