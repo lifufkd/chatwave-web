@@ -26,9 +26,7 @@
                 <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
             </div>
         </div>
-    
         <!-- Ошибочный Toast -->
-        <!-- Ошибочный Toast с деталями -->
         <div id="errorToast" class="toast align-items-start text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex flex-column w-100">
                 <div class="toast-body">
@@ -45,7 +43,7 @@
                 </div>
             </div>
         </div>
-
+        <!-- Существующий Toast -->
         <div id="toastExists" class="toast text-bg-warning border-0" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
             <div class="toast-body">
@@ -54,13 +52,11 @@
             <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Закрыть"></button>
             </div>
         </div>
-  
     </div>
 
   
     <div class="container-fluid d-flex justify-content-center align-items-center w-100 min-vh-100">
         <div class="container d-flex justify-content-center shadow-lg rounded flex-column flex-md-row m-3 p-3">
-
             <!-- Форма регистрации -->
             <div class="container d-flex flex-column justify-content-around align-items-center py-5 ps-md-5">
                 <h1 class="text-center mb-4">Sign up</h1>
@@ -68,8 +64,8 @@
                     <div class="mb-3">
                         <label for="nickname" class="form-label">Nickname</label>
                         <div class="input-group">
-                            <span class="input-group-text"><i class="bi bi-person"></i></span>
-                            <input type="text" class="form-control" id="nickname" name="nickname" minlength="3" required>
+                            <span class="input-group-text bg-transparent"><i class="bi bi-person"></i></span>
+                            <input type="text" class="form-control input-field-style" id="nickname" name="nickname" minlength="3" required>
                             <div class="invalid-feedback">
                                 Nickname must be at least 3 characters.
                             </div>
@@ -79,8 +75,8 @@
                     <div class="mb-3">
                         <label for="login" class="form-label">Login</label>
                         <div class="input-group">
-                            <span class="input-group-text"><i class="bi bi-person-badge"></i></span>
-                            <input type="text" class="form-control" id="login" name="login" minlength="3" required>
+                            <span class="input-group-text bg-transparent"><i class="bi bi-person-badge"></i></span>
+                            <input type="text" class="form-control input-field-style" id="login" name="login" minlength="3" required>
                             <div class="invalid-feedback">
                                 Login must be at least 3 characters.
                             </div>
@@ -90,8 +86,8 @@
                     <div class="mb-3">
                         <label for="password" class="form-label">Password</label>
                         <div class="input-group">
-                            <span class="input-group-text"><i class="bi bi-lock"></i></span>
-                            <input type="password" class="form-control" id="password" name="password"
+                            <span class="input-group-text bg-transparent"><i class="bi bi-lock"></i></span>
+                            <input type="password" class="form-control input-field-style" id="password" name="password"
                                 pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$"
                                 title="Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, and one number."
                                 required>
@@ -107,8 +103,8 @@
                     <div class="mb-3">
                         <label for="confirm-password" class="form-label">Confirm Password</label>
                         <div class="input-group">
-                            <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-                            <input type="password" class="form-control" id="confirm-password" name="confirm-password" required>
+                            <span class="input-group-text bg-transparent"><i class="bi bi-lock-fill"></i></span>
+                            <input type="password" class="form-control input-field-style" id="confirm-password" name="confirm-password" required>
                             <button class="btn btn-outline-secondary toggle-password" type="button" data-target="confirm-password">
                                 <i class="bi bi-eye-slash"></i>
                             </button>
@@ -119,7 +115,7 @@
                     </div>
             
                     <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="statements-checkbox" required>
+                        <input type="checkbox" class="form-check-input input-field-style" id="statements-checkbox" required>
                         <label class="form-check-label" for="statements-checkbox">
                             I agree all statements in 
                             <a href="https://holyc-lang.com/" class="text-secondary">Terms of service</a>
@@ -129,7 +125,7 @@
                         </div>
                     </div>
             
-                    <button class="btn btn-primary text-primary w-100" type="submit">Submit</button>
+                    <button class="btn btn-primary w-100" type="submit">Submit</button>
                 </form>
             </div>
       
