@@ -9,14 +9,12 @@
     --bg-color: #1a1d21;
     --bg-secondary-color: #212529;
     --text-color: #ffffff;
-    --accent-color: #4c9655;
+    --accent-color: #3c9f47;
     --card-color: #343a40;
-    --unread-message-color: #343a40;
-    --read-message-color: #495057;
+    --unread-message-color: #495057;
+    --read-message-color: #343a40;
+    --delivered-message-color: #0d6efd;
     --secondary-text: #aaacaa;
-    
-    --primary-hover-bg: #59e481;
-    --primary-hover-border: #59e481;
   }
   
   body {
@@ -45,11 +43,21 @@
   }
 
   /* Messages */
-  .unread-message {
-    background-color: var(--unread-message-color);
-  }
-  .read-message {
+  .sent {
     background-color: var(--read-message-color);
+  }
+  .sent.delivered {
+    border-color: var(--delivered-message-color) !important;
+  }
+  .sent.read {
+    border-color: var(--accent-color) !important;
+  }
+
+  .recieved.read {
+    background-color: var(--read-message-color);
+  }
+  .recieved.unread {
+    background-color: var(--unread-message-color);
   }
 
   /* Text */

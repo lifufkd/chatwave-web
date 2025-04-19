@@ -7,17 +7,14 @@
 
 :root {
     --bg-color: #ffffff;
-    --text-color: #000000;
-    --accent-color: #0d6efd;
-    --card-color: #f8f9fa;
+    --bg-secondary-color: #f8f9fa;
+    --text-color: #212529;
+    --accent-color: #3c9f47;
+    --card-color: #e9ecef;
+    --unread-message-color: #e9ecef;
+    --read-message-color: #f8f9fa;
+    --delivered-message-color: #0d6efd;
     --secondary-text: #6c757d;
-
-    /*Primary btn colors*/
-    --primary-bg: #0d6efd;
-    --primary-border: #0d6efd;
-    --primary-text: #ffffff;
-    --primary-hover-bg: #0b5ed7;
-    --primary-hover-border: #0a58ca;
   }
   
   body {
@@ -25,20 +22,61 @@
     background-color: var(--bg-color);
     color: var(--text-color);
   }
-  input {
-    color: var(--text-color) !important;
-    background-color: var(--secondary-text) !important;
+  .input-field-style {
+    color: var(--text-color);
+    background-color: var(--card-color);
+  }
+  .input-field-style::placeholder {
+    color: var(--text-color);
+  }
+  .input-field-style:focus {
+    background-color: var(--card-color);
+    color: var(--text-color);
+    outline: none;
+    box-shadow: none;
+  }
+  .layers-style {
+    background-color: var(--bg-color);
+  }
+  .interactive-style {
+    background-color: var(--bg-secondary-color);
   }
 
+  /* Messages */
+  .sent {
+    background-color: var(--read-message-color);
+  }
+  .sent.delivered {
+    border-color: var(--delivered-message-color) !important;
+  }
+  .sent.read {
+    border-color: var(--accent-color) !important;
+  }
+
+  .recieved.read {
+    background-color: var(--read-message-color);
+  }
+  .recieved.unread {
+    background-color: var(--unread-message-color);
+  }
+
+  /* Text */
+  .primary-text-style {
+    color: var(--text-color)
+  }
+  .secondary-text-style {
+    color: var(--secondary-text)
+  }
+  .accent-text-style {
+    color: var(--accent-color)
+  }
 
   /* Modal window */
   .modal-body {
-    font-family: 'Muller', sans-serif;
     background-color: var(--bg-color);
-    color: var(--text-color);
   }
   .modal-header {
-    background-color: var(--secondary-text) !important;
+    background-color: var(--bg-secondary-color);
   }
   .modal-title {
     color: var(--text-color);
@@ -47,25 +85,17 @@
   .conversation-card {
     background-color: var(--card-color);
   }
-  .conversation-card-text {
-    color: var(--text-color) !important;
-  }
   .unread-badge {
-    background-color: var(--accent-color) !important;
+    background-color: var(--accent-color);
   }
 
   /*Buttons*/
   .btn-primary {
-    background-color: var(--primary-bg) !important;
-    border-color: var(--primary-border) !important;
-    color: var(--primary-text) !important;
+    background-color: var(--card-color);
+    border-color: var(--accent-color);
+    color: var(--text-color);
   }
-  
   .btn-primary:hover {
-    background-color: var(--primary-hover-bg) !important;
-    border-color: var(--primary-hover-border) !important;
+    background-color: var(--accent-color);
+    border-color: var(--card-color);
   }
-  .text-primary {
-    color: var(--bg-color) !important
-  }
-  
