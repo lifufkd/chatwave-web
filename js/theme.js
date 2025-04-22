@@ -1,11 +1,14 @@
 const logo = document.getElementById('logo');
+const logoMobile = document.getElementById('logo-mobile');
 const themeLink = document.getElementById('theme-link');
 const themeToggle = document.getElementById('toggle-theme');
+const themeTogglerMobile = document.getElementById('toggle-theme-mobile');
 const themeIcon = document.getElementById('theme-icon');
 
 function setTheme(theme) {
   themeLink.href = theme === 'dark' ? '../styles/themes/dark.css' : '../styles/themes/light.css';
   logo.src = theme === 'dark' ? '../assests/logo-dark.png' : '../assests/logo-light.png';
+  logoMobile.src = theme === 'dark' ? '../assests/logo-dark.png' : '../assests/logo-light.png';
   UpdateThemeTogglerIcon(theme);
   localStorage.setItem('theme', theme);
 }
@@ -44,6 +47,7 @@ function toggleTheme() {
 }
 
 themeToggle.addEventListener('click', toggleTheme);
+themeTogglerMobile.addEventListener('click', toggleTheme);
 
 // Автоматически применяем системную тему при первом входе
 (function () {

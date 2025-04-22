@@ -82,6 +82,17 @@
     color: var(--text-color);
   }
 
+  /* Offcanvas window */
+  .offcanvas-body {
+    background-color: var(--bg-color);
+  }
+  .offcanvas-header {
+    background-color: var(--bg-secondary-color);
+  }
+  .offcanvas-title {
+    color: var(--text-color);
+  }
+
   .conversation-card {
     background-color: var(--card-color);
   }

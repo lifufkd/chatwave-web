@@ -13,8 +13,6 @@
   height: 50px;
   overflow: hidden;
   border-radius: 50%; /* круглая форма */
-  position: relative;
-  flex-shrink: 0; /* не сжимается */
 }
 
 .avatar {
@@ -27,6 +25,10 @@
 
 .chat-footer {
   border-top: 1px solid #343a40;
+}
+
+.message-container {
+    max-width: 75%;
 }
 
 .unread-badge {

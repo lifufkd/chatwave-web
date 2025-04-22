@@ -113,7 +113,7 @@
                 id="conversation-avatar">
             </div>
             <h5 class="modal-title ms-2 mb-0" id="user-profile-nickname">Nickname</h5>
-            <button type="button" class="custom-close ms-auto text-danger" data-bs-dismiss="modal" aria-label="Close">
+            <button type="button" class="custom-close ms-auto" data-bs-dismiss="modal" aria-label="Close">
               <i class="bi bi-x"></i>
             </button>
           </div>
@@ -134,7 +134,7 @@
                 <i class="bi bi-clock me-2 text-secondary"></i>
                 <div class="primary-text-style" id="user-profile-last-online"><strong>Last online:</strong> 15 April 2025, 13:45</div>
             </div>
-            <div class="d-flex align-items-center">
+            <div class="d-flex align-items-centewindows size table bootstrapr">
                 <i class="bi bi-calendar-plus me-2 text-secondary"></i>
                 <div class="primary-text-style" id="user-profile-created-at"><strong>Created at:</strong> 10 January 2024, 08:23</div>
             </div>
@@ -143,9 +143,164 @@
       </div>
     </div>
 
+    <!-- Left Off-Canvas (Logo and Settings for Mobile) -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="settingsOffcanvas" aria-labelledby="settingsOffcanvasLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="dialogsOffcanvasLabel">Menu</h5>
+        <button type="button" class="custom-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close">
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
+      <div class="offcanvas-body d-flex flex-column justify-content-between align-items-center h-100">
+
+        <img id="logo-mobile" src="assests/logo-light.png" alt="logo" class="img-fluid w-50">
+
+        <div class="d-flex flex-column justify-content-between align-items-center">
+          <button class="btn btn-outline-secondary border border-1 rounded-circle mb-2" id="toggle-theme-mobile">
+            <i class="bi bi-moon-fill fs-3" id="theme-icon"></i>
+          </button>
+          <button class="btn btn-outline-secondary border border-1 rounded-circle" data-bs-toggle="modal" data-bs-target="#SettingsModal" id="toggle-settings">
+            <i class="bi bi-gear-fill fs-3"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Off-Canvas (Dialogs for Mobile) -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="dialogsOffcanvas" aria-labelledby="dialogsOffcanvasLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="dialogsOffcanvasLabel">Dialogs</h5>
+        <button type="button" class="custom-close ms-auto" data-bs-dismiss="offcanvas" aria-label="Close">
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
+      <div class="offcanvas-body d-flex flex-column justify-content-start align-items-center flex-grow-1 overflow-y-auto">
+        <div class="input-group rounded w-100">
+          <span class="input-group-text bg-transparent border-end-0">
+            <i class="bi bi-search"></i>
+          </span>
+          <input 
+            type="text" 
+            class="form-control border-start-0 rounded-end input-field-style py-2 ps-3" 
+            placeholder="Search"
+            aria-label="Search"
+          >
+        </div>
+
+        <div class="d-flex justify-content-start align-items-center my-4 w-100">
+          <h2 class="text-start primary-text-style">Founded users</h2>
+        </div>
+
+        <div class="card conversation-card shadow border-0 mb-3 w-100 pointer-on-hover">
+          <div class="card-body py-3">
+            <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-3">
+              <div class="flex-shrink-0 mx-auto mx-md-0">
+                <div class="avatar-container me-1">
+                  <img 
+                    src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsuperstarsbio.com%2Fwp-content%2Fuploads%2F2019%2F01%2FRyan-Gosling.jpg&f=1" 
+                    class="avatar border border-2" 
+                    alt="User avatar"
+                    id="conversation-avatar">
+                </div>
+              </div>
+              <div class="flex-grow-1 text-center text-md-start overflow-hidden">
+                <h6 class="mb-1 text-truncate primary-text-style mb-2" id="conversation-name">Saved Messages</h6>
+                <p class="mb-0 small primary-text-style text-truncate mw-100" id="conversation-last-message-content">
+                  This is a very long message preview that will be truncated on small screens.
+                </p>
+              </div>
+              <div class="d-flex flex-column justify-content-start align-items-center">
+                <small class="primary-text-style" id="conversation-last-message-date">09.04.2025</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-start align-items-center my-4 w-100">
+          <h2 class="text-start primary-text-style">Chats</h2>
+        </div>
+        
+        <div class="card conversation-card shadow border-0 mb-3 w-100 pointer-on-hover">
+          <div class="card-body py-3">
+            <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-3">
+              <div class="flex-shrink-0 mx-auto mx-md-0">
+                <div class="avatar-container me-1">
+                  <img 
+                    src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsuperstarsbio.com%2Fwp-content%2Fuploads%2F2019%2F01%2FRyan-Gosling.jpg&f=1" 
+                    class="avatar border border-2" 
+                    alt="User avatar"
+                    id="conversation-avatar">
+                </div>
+              </div>
+              <div class="flex-grow-1 text-center text-md-start overflow-hidden">
+                <h6 class="mb-1 text-truncate primary-text-style mb-2" id="conversation-name">Saved Messages</h6>
+                <p class="mb-0 small primary-text-style text-truncate mw-100" id="conversation-last-message-content">
+                  This is a very long message preview that will be truncated on small screens.
+                </p>
+              </div>
+              <div class="d-flex flex-column justify-content-start align-items-center">
+                <small class="primary-text-style" id="conversation-last-message-date">09.04.2025</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card conversation-card shadow border-0 mb-3 w-100 pointer-on-hover">
+          <div class="card-body py-3">
+            <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-3">
+              <div class="flex-shrink-0 mx-auto mx-md-0">
+                <div class="avatar-container me-1">
+                  <img 
+                    src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsuperstarsbio.com%2Fwp-content%2Fuploads%2F2019%2F01%2FRyan-Gosling.jpg&f=1" 
+                    class="avatar border border-2" 
+                    alt="User avatar"
+                    id="conversation-avatar">
+                </div>
+              </div>
+              <div class="flex-grow-1 text-center text-md-start overflow-hidden">
+                <h6 class="mb-1 text-truncate primary-text-style mb-2" id="conversation-name">Saved Messages</h6>
+                <p class="mb-0 small primary-text-style text-truncate mw-100" id="conversation-last-message-content">
+                  This is a very long message preview that will be truncated on small screens.
+                </p>
+              </div>
+              <div class="d-flex flex-column justify-content-start align-items-center">
+                <small class="primary-text-style" id="conversation-last-message-date">09.04.2025</small>
+              </div>
+            </div>
+          </div>
+        </div>   
+        <div class="card conversation-card shadow border-0 mb-3 w-100 pointer-on-hover">
+          <div class="card-body py-3">
+            <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-3">
+              <div class="flex-shrink-0 mx-auto mx-md-0">
+                <div class="avatar-container me-1">
+                  <img 
+                    src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsuperstarsbio.com%2Fwp-content%2Fuploads%2F2019%2F01%2FRyan-Gosling.jpg&f=1" 
+                    class="avatar border border-2" 
+                    alt="User avatar"
+                    id="conversation-avatar">
+                </div>
+              </div>
+              <div class="flex-grow-1 text-center text-md-start overflow-hidden">
+                <h6 class="mb-1 text-truncate primary-text-style mb-2" id="conversation-name">Saved Messages</h6>
+                <p class="mb-0 small primary-text-style text-truncate mw-100" id="conversation-last-message-content">
+                  This is a very long message preview that will be truncated on small screens.
+                </p>
+              </div>
+              <div class="text-center text-md-end d-flex flex-column align-items-center align-items-md-end">
+                <small class="primary-text-style mb-2" id="conversation-last-message-date">09.04.2025</small>
+                <span class="badge unread-badge primary-text-style" id="conversation-unread-quantity">
+                  5
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>   
+      </div>
+    </div>
+
     <div class="container-fluid row w-100 vh-100 p-2">
-        <div class="col d-flex flex-column justify-content-between align-items-center shadow rounded p-2 layers-style">
-            <div >
+        <div class="col d-none d-md-flex flex-column justify-content-between align-items-center shadow rounded p-2 layers-style">
+            <div>
               <img id="logo" src="assests/logo-light.png" alt="logo" class="img-fluid">
             </div>
             <div class="d-flex flex-column justify-content-between align-items-center">
@@ -158,7 +313,7 @@
             </div>
           </div>
 
-        <div class="col-3 d-flex flex-column justify-content-start align-items-center flex-grow-1 overflow-y-auto h-100 shadow rounded p-2 layers-style">
+        <div class="col-3 d-none d-md-flex flex-column justify-content-start align-items-center flex-grow-1 overflow-y-auto h-100 shadow rounded p-2 layers-style">
             <div class="input-group rounded">
                 <span class="input-group-text bg-transparent border-end-0">
                   <i class="bi bi-search"></i>
@@ -177,26 +332,24 @@
 
             <div class="card conversation-card shadow border-0 mb-3 w-100 pointer-on-hover">
               <div class="card-body py-3">
-                <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-3">
+                <div class="d-flex flex-column flex-lg-row justify-content-between justify-content-lg-start align-items-center gap-3">
                   <!-- Аватар -->
-                  <div class="flex-shrink-0 mx-auto mx-md-0">
-                    <div class="avatar-container me-1">
-                      <img 
+                  <div class="flex-shrink-0 avatar-container mw-100">
+                    <img 
                       src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsuperstarsbio.com%2Fwp-content%2Fuploads%2F2019%2F01%2FRyan-Gosling.jpg&f=1" 
                       class="avatar border border-2" 
                       alt="User avatar"
                       id="conversation-avatar">
-                    </div>
                   </div>
                   <!-- Контент -->
-                  <div class="flex-grow-1 text-center text-md-start overflow-hidden">
-                    <h6 class="mb-1 text-truncate primary-text-style mb-2" id="conversation-name">Saved Messages</h6>
-                    <p class="mb-0 small primary-text-style text-truncate mw-100" id="conversation-last-message-content">
+                  <div class="text-center text-lg-start overflow-hidden mw-100">
+                    <h6 class="primary-text-style text-truncate mb-2" id="conversation-name">Saved Messages</h6>
+                    <p class="small primary-text-style text-truncate mb-0" id="conversation-last-message-content">
                       This is a very long message preview that will be truncated on small screens.
                     </p>
                   </div>
                   <!-- Дата и бейдж -->
-                  <div class="d-flex flex-column justify-content-start align-items-center">
+                  <div class="d-flex flex-column justify-content-start align-items-center align-items-lg-end">
                     <small class="primary-text-style" id="conversation-last-message-date">09.04.2025</small>
                   </div>
                 </div>
@@ -210,54 +363,50 @@
             <!--Conversation card-->
             <div class="card conversation-card shadow border-0 mb-3 w-100 pointer-on-hover">
               <div class="card-body py-3">
-                <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-3">
+                <div class="d-flex flex-column flex-lg-row justify-content-between justify-content-lg-start align-items-center gap-3">
                   <!-- Аватар -->
-                  <div class="flex-shrink-0 mx-auto mx-md-0">
-                    <div class="avatar-container me-1">
-                      <img 
+                  <div class="flex-shrink-0 avatar-container mw-100">
+                    <img 
                       src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsuperstarsbio.com%2Fwp-content%2Fuploads%2F2019%2F01%2FRyan-Gosling.jpg&f=1" 
                       class="avatar border border-2" 
                       alt="User avatar"
                       id="conversation-avatar">
-                    </div>
                   </div>
                   <!-- Контент -->
-                  <div class="flex-grow-1 text-center text-md-start overflow-hidden">
-                    <h6 class="mb-1 text-truncate primary-text-style mb-2" id="conversation-name">Saved Messages</h6>
-                    <p class="mb-0 small primary-text-style text-truncate mw-100" id="conversation-last-message-content">
+                  <div class="text-center text-lg-start overflow-hidden mw-100">
+                    <h6 class="primary-text-style text-truncate mb-2" id="conversation-name">Saved Messages</h6>
+                    <p class="small primary-text-style text-truncate mb-0" id="conversation-last-message-content">
                       This is a very long message preview that will be truncated on small screens.
                     </p>
                   </div>
                   <!-- Дата и бейдж -->
-                  <div class="d-flex flex-column justify-content-start align-items-center">
+                  <div class="d-flex flex-column justify-content-start align-items-center align-items-lg-end">
                     <small class="primary-text-style" id="conversation-last-message-date">09.04.2025</small>
                   </div>
                 </div>
               </div>
-            </div>   
+            </div> 
             <!--Conversation card unread-->
             <div class="card conversation-card shadow border-0 mb-3 w-100 pointer-on-hover">
               <div class="card-body py-3">
-                <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-3">
+                <div class="d-flex flex-column flex-lg-row justify-content-between justify-content-lg-start align-items-center gap-3">
                   <!-- Аватар -->
-                  <div class="flex-shrink-0 mx-auto mx-md-0">
-                    <div class="avatar-container me-1">
-                      <img 
+                  <div class="flex-shrink-0 avatar-container mw-100">
+                    <img 
                       src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsuperstarsbio.com%2Fwp-content%2Fuploads%2F2019%2F01%2FRyan-Gosling.jpg&f=1" 
                       class="avatar border border-2" 
                       alt="User avatar"
                       id="conversation-avatar">
-                    </div>
                   </div>
                   <!-- Контент -->
-                  <div class="flex-grow-1 text-center text-md-start overflow-hidden">
-                    <h6 class="mb-1 text-truncate primary-text-style mb-2" id="conversation-name">Saved Messages</h6>
-                    <p class="mb-0 small primary-text-style text-truncate mw-100" id="conversation-last-message-content">
+                  <div class="text-center text-lg-start overflow-hidden mw-100">
+                    <h6 class="primary-text-style text-truncate mb-2" id="conversation-name">Saved Messages</h6>
+                    <p class="small primary-text-style text-truncate mb-0" id="conversation-last-message-content">
                       This is a very long message preview that will be truncated on small screens.
                     </p>
                   </div>
                   <!-- Дата и бейдж -->
-                  <div class="text-center text-md-end d-flex flex-column align-items-center align-items-md-end">
+                  <div class="d-flex flex-column justify-content-start align-items-center align-items-lg-end">
                     <small class="primary-text-style mb-2" id="conversation-last-message-date">09.04.2025</small>
                     <span class="badge unread-badge primary-text-style" id="conversation-unread-quantity">
                       5
@@ -265,10 +414,16 @@
                   </div>
                 </div>
               </div>
-            </div>   
+            </div>
         </div>
 
-        <div class="col-8 grid-split shadow rounded p-0 flex-grow-1 overflow-y-auto h-100 layers-style">
+        <div class="col-12 col-md-8 grid-split shadow rounded p-0 layers-style">
+          <!-- <button class="btn btn-primary m-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#settingsOffcanvas" aria-controls="simpleOffcanvas">
+            <i class="bi bi-list"></i> Open Menu left
+          </button>
+          <button class="btn btn-primary m-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#dialogsOffcanvas" aria-controls="simpleOffcanvas">
+            <i class="bi bi-list"></i> Open Menu right
+          </button> -->
             <!-- Заголовок чата -->
             <div class="d-flex justify-content-between align-items-center px-2 py-3 interactive-style">
                 <div class="d-flex justify-content-center aligin-items-center pointer-on-hover" data-bs-toggle="modal" data-bs-target="#ProfileModal" id="toggle-user-profile">
@@ -297,30 +452,30 @@
             </div>
 
             <!-- Тело чата -->
-            <div class="flex-grow-1">
-                <div class="d-flex align-items-center m-2">
+            <div class="flex-grow-1 overflow-y-auto h-100">
+                <div class="d-flex align-items-start m-2">
                   <div class="avatar-container me-2">
                     <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsuperstarsbio.com%2Fwp-content%2Fuploads%2F2019%2F01%2FRyan-Gosling.jpg&f=1" class="avatar border border-2" alt="User avatar">
                   </div>
-                  <div class="rounded-4 px-3 py-2 d-flex flex-column recieved read">
-                    <span class="text-start w-100">Hello, Darshan</span>
+                  <div class="rounded-4 px-3 py-2 d-flex flex-column recieved read message-container">
+                    <span class="text-start w-100">Hello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, DarshanHello, Darshan</span>
                     <small class="secondary-text-style ms-2 text-end w-100">9:30 am</small>
                   </div>
                 </div>
-                <div class="d-flex align-items-center justify-content-end m-2">
+                <div class="d-flex align-items-start justify-content-end m-2">
                   <div class="avatar-container me-2">
                     <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsuperstarsbio.com%2Fwp-content%2Fuploads%2F2019%2F01%2FRyan-Gosling.jpg&f=1" class="avatar border border-2" alt="User avatar">
                   </div>
-                  <div class="rounded-4 px-3 py-2 d-flex flex-column sent read border border-2">
+                  <div class="rounded-4 px-3 py-2 d-flex flex-column sent read border border-2 message-container">
                     <span class="text-start w-100">Hello</span>
                     <small class="secondary-text-style ms-2 text-end w-100">9:31 am</small>
                   </div>
                 </div>
-                <div class="d-flex align-items-center m-2">
+                <div class="d-flex align-items-start m-2">
                   <div class="avatar-container me-2">
                     <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsuperstarsbio.com%2Fwp-content%2Fuploads%2F2019%2F01%2FRyan-Gosling.jpg&f=1" class="avatar border border-2" alt="User avatar">
                   </div>
-                  <div class="rounded-4 px-3 py-2 d-flex flex-column recieved unread">
+                  <div class="rounded-4 px-3 py-2 d-flex flex-column recieved unread message-container">
                     <span class="text-start w-100">No</span>
                     <small class="secondary-text-style ms-2 text-end w-100">9:30 am</small>
                   </div>
