@@ -1,17 +1,20 @@
-export function showSuccsessToast() {
+export function showSuccsessToast(message) {
     const toastEl = document.getElementById('successToast');
+    document.getElementById('successToastMessage').textContent = message;
     const toast = new bootstrap.Toast(toastEl);
     toast.show();
   }
 
-export function showExistsToast() {
+export function showExistsToast(message) {
   const toastEl = document.getElementById('toastExists');
+  document.getElementById('existsToastMessage').textContent = message;
   const toast = new bootstrap.Toast(toastEl);
   toast.show();
 }
 
-export function showNotFoundToast() {
+export function showNotFoundToast(message) {
   const toastEl = document.getElementById('toastNotFound');
+  document.getElementById('notFoundToastMessage').textContent = message;
   const toast = new bootstrap.Toast(toastEl);
   toast.show();
 }

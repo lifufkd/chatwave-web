@@ -15,14 +15,14 @@ export function process_signin(username, password) {
         )
         .then(response => {
             document.cookie = `access_token=${response.data.access_token}; path=/; max-age=${API_TOKEN_LIFESPAN}; SameSite=Lax`;
-            showSuccsessToast();
+            showSuccsessToast("Авторизация прошла успешно!");
             setTimeout(() => {
                 window.location.href = '/index.html';
             }, 3000);
         })
         .catch(error => {
             if (error.response?.status === 404) {
-                showNotFoundToast();
+                showNotFoundToast("Аккаунт с такими данными не существует.");
             } else {
                 showErrorToast(error);
             }

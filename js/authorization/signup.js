@@ -13,14 +13,14 @@ export function process_signup(nickname, username, password) {
             }
         )
         .then(response => {
-            showSuccsessToast();
+            showSuccsessToast("Регистрация прошла успешно!");
             setTimeout(() => {
                 window.location.href = '/authorization/signin.html';
             }, 3000);
         })
         .catch(error => {
             if (error.response?.status === 409) {
-                showExistsToast();
+                showExistsToast("Аккаунт с такими данными уже существует.");
             } else {
                 showErrorToast(error);
             }

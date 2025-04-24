@@ -20,9 +20,7 @@
         <!-- Успешный Toast -->
         <div id="successToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
-                <div class="toast-body">
-                    Регистрация прошла успешно!
-                </div>
+                <div class="toast-body" id="successToastMessage"></div>
                 <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
             </div>
         </div>
@@ -46,9 +44,7 @@
         <!-- Существующий Toast -->
         <div id="toastExists" class="toast text-bg-warning border-0" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
-            <div class="toast-body">
-                Аккаунт с такими данными уже существует.
-            </div>
+            <div class="toast-body"></div>
             <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Закрыть"></button>
             </div>
         </div>
