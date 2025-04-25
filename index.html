@@ -70,12 +70,12 @@
                       </button>
                   </li>
                   <li class="border-0 mb-3">
-                      <button class="btn btn-primary w-100 text-start d-flex align-items-center primary-text-style py-2" data-bs-dismiss="modal" id="logout-btn">
+                      <button class="btn btn-primary w-100 text-start d-flex align-items-center primary-text-style py-2" data-bs-dismiss="modal" id="logoutBtn">
                           <i class="bi bi-box-arrow-right me-2"></i> Выйти
                       </button>
                   </li>
                   <li class="border-0 mb-3">
-                    <button class="btn btn-primary w-100 text-start d-flex align-items-center primary-text-style py-2" data-bs-dismiss="modal">
+                    <button class="btn btn-primary w-100 text-start d-flex align-items-center primary-text-style py-2" data-bs-dismiss="modal" id="deleteAccountBtn">
                         <i class="bi bi-person-x me-2"></i> Удалить аккаунт
                     </button>
                   </li>
@@ -86,54 +86,88 @@
     </div>
 
     <!-- My Profile Modal Window -->
-    <div class="modal fade" id="MyProfileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+    <div class="modal fade" id="MyProfileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true" id="profile-view-section">
       <div class="modal-dialog modal-dialog-centered mw-20">
-          <div class="modal-content modal-window">
-              <div class="modal-header align-items-center">
-                  <div class="avatar-container me-1">
-                    <img
-                      src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsuperstarsbio.com%2Fwp-content%2Fuploads%2F2019%2F01%2FRyan-Gosling.jpg&f=1" 
-                      class="avatar border border-2" 
-                      alt="User avatar"
-                      id="conversation-avatar">
-                  </div>
-                  <h5 class="modal-title ms-2 mb-0" id="my-profile-nickname">Nickname</h5>
-                  <button type="button" class="custom-close ms-auto" data-bs-dismiss="modal" aria-label="Close">
-                    <i class="bi bi-x"></i>
-                  </button>
-              </div>
-              <div class="modal-body d-flex flex-column gap-3">
-                  <div class="d-flex align-items-center">
-                      <i class="bi bi-person me-2"></i>
-                      <div class="primary-text-style" id="my-profile-login"><strong>Login:</strong> user_login</div>
-                  </div>
-                  <div class="d-flex align-items-center">
-                      <i class="bi bi-info-circle me-2"></i>
-                      <div class="primary-text-style" id="my-profile-bio"><strong>Bio:</strong> Enthusiastic developer & coffee lover ☕</div>
-                  </div>
-                  <div class="d-flex align-items-center">
-                      <i class="bi bi-balloon me-2"></i>
-                      <div class="primary-text-style" id="my-profile-birthday"><strong>Birthday:</strong> 12 March 1997</div>
-                  </div>
-                  <div class="d-flex align-items-center">
-                      <i class="bi bi-clock me-2"></i>
-                      <div class="primary-text-style" id="my-profile-last-online"><strong>Last online:</strong> 15 April 2025, 13:45</div>
-                  </div>
-                  <div class="d-flex align-items-center">
-                      <i class="bi bi-calendar-plus me-2"></i>
-                      <div class="primary-text-style" id="my-profile-created-at"><strong>Created at:</strong> 10 January 2024, 08:23</div>
-                  </div>
-                  <div class="d-flex align-items-center">
-                      <i class="bi bi-arrow-repeat me-2"></i>
-                      <div class="primary-text-style" id="my-profile-updated-at"><strong>Updated at:</strong> 28 March 2025, 21:10</div>
-                  </div>
-                  <div class="mt-auto">
-                      <button class="btn btn-primary w-100 rounded-3" id="OpenEditProfileBtn">Edit Profile</button>
-                  </div>
-              </div>
-          </div>
+        <div class="modal-content modal-window">
+            <div class="modal-header align-items-center">
+                <div class="avatar-container me-1">
+                  <img
+                    src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsuperstarsbio.com%2Fwp-content%2Fuploads%2F2019%2F01%2FRyan-Gosling.jpg&f=1" 
+                    class="avatar border border-2" 
+                    alt="User avatar"
+                    id="conversation-avatar">
+                </div>
+                <h5 class="modal-title ms-2 mb-0" id="my-profile-nickname">Nickname</h5>
+                <button type="button" class="custom-close ms-auto" data-bs-dismiss="modal" aria-label="Close">
+                  <i class="bi bi-x"></i>
+                </button>
+            </div>
+            <div class="modal-body d-flex flex-column gap-3">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-person me-2"></i>
+                    <div class="primary-text-style" id="my-profile-login"><strong>Login:</strong> user_login</div>
+                </div>
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-info-circle me-2"></i>
+                    <div class="primary-text-style" id="my-profile-bio"><strong>Bio:</strong> Enthusiastic developer & coffee lover ☕</div>
+                </div>
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-balloon me-2"></i>
+                    <div class="primary-text-style" id="my-profile-birthday"><strong>Birthday:</strong> 12 March 1997</div>
+                </div>
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-clock me-2"></i>
+                    <div class="primary-text-style" id="my-profile-last-online"><strong>Last online:</strong> 15 April 2025, 13:45</div>
+                </div>
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-calendar-plus me-2"></i>
+                    <div class="primary-text-style" id="my-profile-created-at"><strong>Created at:</strong> 10 January 2024, 08:23</div>
+                </div>
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-arrow-repeat me-2"></i>
+                    <div class="primary-text-style" id="my-profile-updated-at"><strong>Updated at:</strong> 28 March 2025, 21:10</div>
+                </div>
+                <div class="mt-auto">
+                    <button class="btn btn-primary w-100 rounded-3" id="OpenEditProfileBtn">Edit Profile</button>
+                </div>
+            </div>
+        </div>
       </div>
-  </div>
+    </div>
+    <!-- Модальное окно редактирования профиля -->
+    <div class="modal-body d-none flex-column gap-3" id="profile-edit-section">
+      <form class="needs-validation" id="edit-profile-form" novalidate>
+          <div class="mb-3">
+              <label class="form-label">Nickname</label>
+              <input type="text" class="form-control" id="edit-nickname" name="nickname" minlength="3" required>
+              <div class="invalid-feedback">Nickname must be at least 3 characters.</div>
+          </div>
+          <div class="mb-3">
+              <label class="form-label">Bio</label>
+              <input type="text" class="form-control" id="edit-bio" name="bio">
+          </div>
+          <div class="mb-3">
+              <label class="form-label">Birthday</label>
+              <input type="date" class="form-control" id="edit-birthday" name="birthday">
+          </div>
+          <div class="mb-3">
+              <label class="form-label">New Password</label>
+              <input type="password" class="form-control" id="edit-password"
+                      pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{8,}$"
+                      title="Password must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, and one number.">
+              <div class="invalid-feedback">Password must meet complexity requirements.</div>
+          </div>
+          <div class="mb-3">
+              <label class="form-label">Confirm Password</label>
+              <input type="password" class="form-control" id="edit-confirm-password">
+              <div class="invalid-feedback">Passwords do not match.</div>
+          </div>
+          <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-success w-50">Save</button>
+              <button type="button" class="btn btn-secondary w-50" id="discard-edit">Discard</button>
+          </div>
+      </form>
+    </div>
 
     <!-- Profile Modal Window -->
     <div class="modal fade" id="ProfileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">

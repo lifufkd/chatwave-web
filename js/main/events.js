@@ -1,9 +1,15 @@
-import {logout, DeleteUser} from "./utils.js";
+import {logout, DeleteUser, loadProfileData, processProfileChange} from "./user.js";
 
-document.getElementById("logout-btn").addEventListener("click", function () {
+document.getElementById("logoutBtn").addEventListener("click", function () {
     logout();
   });
 
-document.getElementById("logout-btn").addEventListener("click", function () {
+document.getElementById("deleteAccountBtn").addEventListener("click", function () {
     DeleteUser();
   });
+
+document.getElementById('MyProfileModal').addEventListener('show.bs.modal', loadProfileData);
+
+document.getElementById('OpenEditProfileBtn').addEventListener('click', function () {
+  processProfileChange();
+});
