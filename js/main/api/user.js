@@ -1,6 +1,7 @@
 import {API_BASE_URL} from "../../config.js";
 import { getCookie } from "../utils.js";
 import {showSuccsessToast, showErrorToast} from "../../toasts.js";
+import { logout } from "../user.js";
 
 export async function getProfileData() {
     try {
@@ -13,6 +14,10 @@ export async function getProfileData() {
         const data = response.data;
         return data;
     } catch (error) {
-        showErrorToast(error);
+        if (error.response?.status === 401) {
+            logout();
+        } else {
+            showErrorToast(error);
+        }
     }
 }
