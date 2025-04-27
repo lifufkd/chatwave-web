@@ -13,8 +13,8 @@ export function showExistsToast(message) {
 }
 
 export function showNotFoundToast(message) {
-  const toastEl = document.getElementById('toastNotFound');
-  document.getElementById('notFoundToastMessage').textContent = message;
+  const toastEl = document.getElementById('toastExists');
+  document.getElementById('existsToastMessage').textContent = message;
   const toast = new bootstrap.Toast(toastEl);
   toast.show();
 }

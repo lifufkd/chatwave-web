@@ -23,7 +23,11 @@ export function process_signin(username, password) {
         .catch(error => {
             if (error.response?.status === 404) {
                 showNotFoundToast("Аккаунт с такими данными не существует.");
-            } else {
+            } 
+            else if (error.response?.status === 401) {
+                showNotFoundToast("Аккаунт с такими данными не существует.");
+            }
+            else {
                 showErrorToast(error);
             }
         });
