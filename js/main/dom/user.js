@@ -56,7 +56,7 @@ export function renderChatHeader(user_data) {
     profile_avatar_obj.src = avatarUrl;
     reloadImage(profile_avatar_obj);
     document.getElementById('chat-nickname').textContent = user_data.nickname || 'No nickname';
-    document.getElementById('chat-last-online').innerHTML = `<strong>Last online:</strong> ${formatChatDateTime(user_data.last_online)}`;
+    document.getElementById('chat-last-online').innerHTML = `${formatChatDateTime(user_data.last_online)}`;
 }
   
 
