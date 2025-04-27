@@ -77,3 +77,23 @@ export async function updateUserAvatar (form_data) {
         }
     }
 }
+
+export async function getUsersByQuery (search_query, limit=10) {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/users/search?search_query=${search_query}&limit=${limit}`);
+        const data = response.data;
+        return data;
+    } catch (error) {
+        showErrorToast(error);
+    }
+}
+
+export async function getUserById(user_id) {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/users?users_ids=${user_id}`);
+        const data = response.data;
+        return data;
+    } catch (error) {
+        showErrorToast(error);
+    }
+}

@@ -1,6 +1,6 @@
 import {API_TOKEN_LIFESPAN} from "../config.js";
-import { getProfileData, deleteUserProfile, updateUserProfile, updateUserAvatar } from "./api/user.js";
-import { updateProfileView, updateProfileEdit } from "./dom/user.js";
+import { getProfileData, deleteUserProfile, updateUserProfile, updateUserAvatar, getUsersByQuery, getUserById } from "./api/user.js";
+import { renderProfileView, renderProfileEdit, clearFoundedUsers, renderFoundedUsers, renderConversatorProfile, renderChatHeader } from "./dom/user.js";
 
 export function logout () {
     document.cookie = `access_token=; path=/; max-age=${API_TOKEN_LIFESPAN}; SameSite=Lax`;
@@ -15,14 +15,14 @@ export async function DeleteUser () {
 export async function loadProfileData() {
     var user_data = await getProfileData();
     if (user_data) {
-        updateProfileView(user_data);
+        renderProfileView(user_data);
     }
 }
 
 export async function processProfileChange () {
     const user = await getProfileData(); // async функция, которая подгружает с API
     if (user) {
-        updateProfileEdit(user);
+        renderProfileEdit(user);
     }
 
     const profile_view = document.getElementById('profile-view-section');
@@ -129,7 +129,29 @@ export async function saveProfileChanges() {
     await updateUserProfile(payload);
     const updatedUser = await getProfileData();
     if (updatedUser) {
-        updateProfileView(updatedUser);
+        renderProfileView(updatedUser);
     }
     discardProfileChanges();
+}
+
+
+export async function searchUsers (search_query) {
+    var founded_users = await getUsersByQuery(search_query, 10);
+    clearFoundedUsers('desktop');
+    renderFoundedUsers(founded_users, 'desktop');
+}
+
+export async function searchUsersMobile (search_query) {
+    var founded_users = await getUsersByQuery(search_query, 10);
+    clearFoundedUsers('mobile');
+    renderFoundedUsers(founded_users, 'mobile');
+}
+
+export async function openNewChat(user_id) {
+    var chat_obj = document.getElementById('chat-container');
+    var user_data = await getUserById(user_id);
+    renderConversatorProfile(user_data[0]);
+    renderChatHeader(user_data[0]);
+    chat_obj.setAttribute('new', true);
+
 }

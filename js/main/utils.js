@@ -27,6 +27,22 @@ export function formatDateTime(isoString) {
     });
 }
 
+export function formatChatDateTime(isoString) {
+  if (!isoString) return '—';
+  const date = convertUTCDateToLocalDate(new Date(isoString));
+
+  const pad = (num) => String(num).padStart(2, '0');
+
+  const day = pad(date.getDate());
+  const month = pad(date.getMonth() + 1); // Месяцы с 0 начинаются
+  const year = date.getFullYear();
+  const hours = pad(date.getHours());
+  const minutes = pad(date.getMinutes());
+
+  return `${day}.${month}.${year} ${hours}:${minutes}`;
+}
+
+
 export function removeExtension(filename) {
   return filename.split('.').slice(0, -1).join('.');
 }
