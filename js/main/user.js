@@ -1,7 +1,6 @@
-import {API_TOKEN_LIFESPAN, API_BASE_URL} from "../config.js";
-import {showSuccsessToast, showErrorToast} from "../toasts.js";
-import { getCookie, formatDate, formatDateTime, getTextAfterColon, formatDateInput, toggleElements } from "./utils.js";
-import { getProfileData } from "./api/user.js";
+import {API_TOKEN_LIFESPAN} from "../config.js";
+import { getProfileData, deleteUserProfile, updateUserProfile, updateUserAvatar } from "./api/user.js";
+import { updateProfileView, updateProfileEdit } from "./dom/user.js";
 
 export function logout () {
     document.cookie = `access_token=; path=/; max-age=${API_TOKEN_LIFESPAN}; SameSite=Lax`;
@@ -10,87 +9,113 @@ export function logout () {
 
 
 export async function DeleteUser () {
-    axios.delete(`${API_BASE_URL}/users/me`, 
-        {
-            headers: {
-              Authorization: `Bearer ${getCookie("access_token")}`
-            }
-        }
-        )
-        .then(response => {
-            showSuccsessToast("Ваш аккаунт успешно удален!");
-            window.location.href = '/authorization/signin.html';
-        })
-        .catch(error => {
-            showErrorToast(error);
-        })
-}
-
-function updateProfileView(user_data) {
-    const avatarUrl = user_data.avatar_name
-        ? `${API_BASE_URL}/media/${user_data.avatar_name}`
-        : 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia1.tenor.com%2Fm%2F9RCIDZjkhBsAAAAd%2Fhamster-meme.gif&f=1&nofb=1&ipt=d3bffaef3437e83b1ae505cae978858d8cfcbc2d493f35a20eeb609f0a5208ae';
-
-    document.getElementById('conversation-avatar').src = avatarUrl;
-    document.getElementById('my-profile-nickname').textContent = user_data.nickname || 'No nickname';
-    document.getElementById('my-profile-login').innerHTML = `<strong>Login:</strong> ${user_data.username || '—'}`;
-    document.getElementById('my-profile-bio').innerHTML = `<strong>Bio:</strong> ${user_data.bio || '—'}`;
-    document.getElementById('my-profile-birthday').innerHTML = `<strong>Birthday:</strong> ${formatDate(user_data.birthday)}`;
-    document.getElementById('my-profile-last-online').innerHTML = `<strong>Last online:</strong> ${formatDateTime(user_data.last_online)}`;
-    document.getElementById('my-profile-created-at').innerHTML = `<strong>Created at:</strong> ${formatDateTime(user_data.created_at)}`;
-    document.getElementById('my-profile-updated-at').innerHTML = `<strong>Updated at:</strong> ${formatDateTime(user_data.updated_at)}`;
+    await deleteUserProfile();
 }
 
 export async function loadProfileData() {
     var user_data = await getProfileData();
-    updateProfileView(user_data);
+    if (user_data) {
+        updateProfileView(user_data);
+    }
 }
 
 export async function processProfileChange () {
     const user = await getProfileData(); // async функция, которая подгружает с API
+    if (user) {
+        updateProfileEdit(user);
+    }
 
-    // Подставляем данные в поля формы
-    document.getElementById('edit-nickname').placeholder = user.nickname ?? '';
-    document.getElementById('edit-bio').placeholder = user.bio ?? '';
-    document.getElementById('edit-birthday').value = user.birthday ? formatDateForInput(user.birthday) : '';
+    const profile_view = document.getElementById('profile-view-section');
+    const profile_edit = document.getElementById('profile-edit-section');
+    const profile_header_view = document.getElementById('profile-view-header-section');
+    const profile_header_edit = document.getElementById('profile-edit-header-section');
+    profile_view.classList.remove("d-flex", "d-none");
+    profile_edit.classList.remove("d-flex", "d-none");
+    profile_header_view.classList.remove("d-none");
+    profile_header_edit.classList.remove("d-none");
 
-    // Показываем форму, скрываем просмотр
-    const profileModal = bootstrap.Modal.getOrCreateInstance(document.getElementById('profile-view-section'));
-    const editProfileModal = bootstrap.Modal.getOrCreateInstance(document.getElementById('profile-edit-section'));
-    profileModal.hide();
-    editProfileModal.show();
+    profile_header_view.classList.add("d-none");
+    profile_view.classList.add("d-none");
+    profile_edit.classList.add("d-flex");
 }
 
-function discardProfileChanges() {
-    const form = document.getElementById('edit-profile-form');
+export function discardProfileChanges() {
+    const form = document.getElementById('profile-edit-section');
     form.reset();
     form.classList.remove('was-validated');
 
-    const profileModal = bootstrap.Modal.getOrCreateInstance(document.getElementById('profile-view-section'));
-    const editProfileModal = bootstrap.Modal.getOrCreateInstance(document.getElementById('profile-edit-section'));
-    profileModal.show();
-    editProfileModal.hide();
+    const profile_view = document.getElementById('profile-view-section');
+    const profile_edit = document.getElementById('profile-edit-section');
+    const profile_header_view = document.getElementById('profile-view-header-section');
+    const profile_header_edit = document.getElementById('profile-edit-header-section');
+    profile_view.classList.remove("d-flex", "d-none");
+    profile_edit.classList.remove("d-flex", "d-none");
+    profile_header_view.classList.remove("d-none");
+    profile_header_edit.classList.remove("d-none");
+
+    profile_header_edit.classList.add("d-none");
+    profile_view.classList.add("d-flex");
+    profile_edit.classList.add("d-none");
 }
 
-async function saveProfileChanges() {
-    const form = document.getElementById('edit-profile-form');
+export async function saveProfileChanges() {
+    const form = document.getElementById('profile-edit-section');
 
     const nicknameInput = document.getElementById('edit-nickname');
     const bioInput = document.getElementById('edit-bio');
     const birthdayInput = document.getElementById('edit-birthday');
     const passwordInput = document.getElementById('edit-password');
-    const confirmPasswordInput = document.getElementById('edit-confirm-password');
+    const confirmPasswordInput = document.getElementById('edit-password-retype');
+    const avatarInput = document.getElementById('edit-avatar-input');
 
-    // Валидация совпадения паролей
+    let valid = true;
+
+    // Проверка никнейма: минимум 3 символа
+    if (nicknameInput.value) {
+        if (nicknameInput.value.trim().length < 3) {
+            nicknameInput.setCustomValidity('Nickname must be at least 3 characters.');
+            valid = false;
+        } else {
+            nicknameInput.setCustomValidity('');
+        }
+    } else {
+        nicknameInput.setCustomValidity('');
+    }
+
+    // Проверка пароля, если он заполнен
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+    if (passwordInput.value) {
+        if (!passwordPattern.test(passwordInput.value)) {
+            passwordInput.setCustomValidity('Password must be at least 8 characters, with uppercase, lowercase letters, and a number.');
+            valid = false;
+        } else {
+            passwordInput.setCustomValidity('');
+        }
+    } else {
+        passwordInput.setCustomValidity('');
+    }
+
+    // Проверка совпадения паролей
     if (passwordInput.value !== confirmPasswordInput.value) {
         confirmPasswordInput.setCustomValidity("Passwords do not match");
+        valid = false;
     } else {
         confirmPasswordInput.setCustomValidity('');
     }
 
-    // Если форма невалидна, не отправляем
-    if (!form.checkValidity()) {
-        form.classList.add('was-validated');
+    // Готовим FormData для отправки файла
+    if (avatarInput.files[0]) {
+        const file = avatarInput.files[0];
+        const formData = new FormData();
+        formData.append('avatar', file);
+        await updateUserAvatar(formData);
+    }
+
+    // Отмечаем форму как проверенную для Bootstrap-валидации
+    form.classList.add('was-validated');
+
+    // Если форма невалидна — не отправляем запрос
+    if (!valid || !form.checkValidity()) {
         return;
     }
 
@@ -101,18 +126,10 @@ async function saveProfileChanges() {
     if (birthdayInput.value) payload.birthday = birthdayInput.value;
     if (passwordInput.value) payload.password = passwordInput.value;
 
-    try {
-        await axios.patch(`${API_BASE_URL}/users/me`, payload, 
-            {
-                headers: {
-                  Authorization: `Bearer ${getCookie("access_token")}`
-                }
-            });
-        showSuccsessToast('Profile updated!');
-        const updatedUser = await getProfileData();
+    await updateUserProfile(payload);
+    const updatedUser = await getProfileData();
+    if (updatedUser) {
         updateProfileView(updatedUser);
-        discardProfileChanges();
-    } catch (error) {
-        showErrorToast('Failed to update profile');
     }
+    discardProfileChanges();
 }

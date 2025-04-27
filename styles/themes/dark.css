@@ -110,3 +110,13 @@
     background-color: var(--accent-color);
     border-color: var(--card-color);
   }
+
+  /* .btn-secondary {
+    background-color: var(--card-color);
+    border-color: var(--accent-color);
+    color: var(--text-color);
+  }
+  .btn-secondary:hover {
+    background-color: var(--accent-color);
+    border-color: var(--card-color);
+  } */
