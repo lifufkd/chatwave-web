@@ -4,6 +4,7 @@ const themeLink = document.getElementById('theme-link');
 const themeToggle = document.getElementById('toggle-theme');
 const themeTogglerMobile = document.getElementById('toggle-theme-mobile');
 const themeIcon = document.getElementById('theme-icon');
+const themeIconMobile = document.getElementById('theme-icon-mobile');
 
 function setTheme(theme) {
   themeLink.href = theme === 'dark' ? '../styles/themes/dark.css' : '../styles/themes/light.css';
@@ -11,17 +12,20 @@ function setTheme(theme) {
   if (logoMobile) {
     logoMobile.src = theme === 'dark' ? '../assests/logo-dark.png' : '../assests/logo-light.png';
   }
-  UpdateThemeTogglerIcon(theme);
+  UpdateThemeTogglerIcon(themeIcon, theme);
+  if (themeIconMobile) {
+    UpdateThemeTogglerIcon(themeIconMobile, theme);
+  }
   localStorage.setItem('theme', theme);
 }
 
-function UpdateThemeTogglerIcon(theme) {
-  themeIcon.classList.remove("bi-sun-fill", "bi-moon-fill");
+function UpdateThemeTogglerIcon(icon_obj, theme) {
+  icon_obj.classList.remove("bi-sun-fill", "bi-moon-fill");
 
   if (theme === 'dark') {
-    themeIcon.classList.add('bi-moon-fill');
+    icon_obj.classList.add('bi-moon-fill');
   } else {
-    themeIcon.classList.add('bi-sun-fill');
+    icon_obj.classList.add('bi-sun-fill');
   }
 }
 
