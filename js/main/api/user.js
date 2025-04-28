@@ -97,3 +97,14 @@ export async function getUserById(user_id) {
         showErrorToast(error);
     }
 }
+
+export async function getUsersByIds(userIds) {
+    try {
+        const params = userIds.map(id => `users_ids=${id}`).join('&');
+        const response = await axios.get(`${API_BASE_URL}/users?${params}`);
+        const data = response.data;
+        return data;
+    } catch (error) {
+        showErrorToast(error);
+    }
+}

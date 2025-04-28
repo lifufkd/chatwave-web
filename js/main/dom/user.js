@@ -31,33 +31,6 @@ export function renderProfileEdit(user_data) {
     document.getElementById('edit-bio').placeholder = user_data.bio || '';
     document.getElementById('edit-birthday').placeholder = formatDate(user_data.birthday);
 }
-
-export function renderConversatorProfile(user_data) {
-    const avatarUrl = user_data.avatar_name
-        ? `${API_BASE_URL}/users/${removeExtension(user_data.avatar_name)}/avatar`
-        : 'https://via.placeholder.com/100';
-
-    var profile_avatar_obj = document.getElementById('user-profile-avatar');
-    profile_avatar_obj.src = avatarUrl;
-    reloadImage(profile_avatar_obj);
-    document.getElementById('user-profile-nickname').textContent = user_data.nickname || 'No nickname';
-    document.getElementById('user-profile-bio').innerHTML = `<strong>Bio:</strong> ${user_data.bio || '—'}`;
-    document.getElementById('user-profile-birthday').innerHTML = `<strong>Birthday:</strong> ${formatDate(user_data.birthday)}`;
-    document.getElementById('user-profile-last-online').innerHTML = `<strong>Last online:</strong> ${formatDateTime(user_data.last_online)}`;
-    document.getElementById('user-profile-created-at').innerHTML = `<strong>Created at:</strong> ${formatDateTime(user_data.created_at)}`;
-}
-
-export function renderChatHeader(user_data) {
-    const avatarUrl = user_data.avatar_name
-        ? `${API_BASE_URL}/users/${removeExtension(user_data.avatar_name)}/avatar`
-        : 'https://via.placeholder.com/100';
-
-    var profile_avatar_obj = document.getElementById('chat-avatar');
-    profile_avatar_obj.src = avatarUrl;
-    reloadImage(profile_avatar_obj);
-    document.getElementById('chat-nickname').textContent = user_data.nickname || 'No nickname';
-    document.getElementById('chat-last-online').innerHTML = `${formatChatDateTime(user_data.last_online)}`;
-}
   
 
 export function clearFoundedUsers (version) {
@@ -88,6 +61,9 @@ export function renderFoundedUsers(users, version) {
       const card = document.createElement('div');
       card.className = 'card conversation-card shadow border-0 mb-3 w-100 pointer-on-hover';
       card.id = `conversation-user-${user.id}`;
+      const avatarUrl = user.avatar_name
+        ? `${API_BASE_URL}/users/${removeExtension(user.avatar_name)}/avatar`
+        : 'https://via.placeholder.com/100';
   
       card.innerHTML = `
         <div class="card-body py-3">
@@ -95,7 +71,7 @@ export function renderFoundedUsers(users, version) {
             <!-- Аватар -->
             <div class="flex-shrink-0 avatar-container mw-100">
               <img 
-                src="${API_BASE_URL}/users/${removeExtension(user.avatar_name)}/avatar" 
+                src="${avatarUrl}" 
                 class="avatar border border-2" 
                 alt="User avatar">
             </div>

@@ -28,7 +28,7 @@ export function formatDateTime(isoString) {
 }
 
 export function formatChatDateTime(isoString) {
-  if (!isoString) return '—';
+  if (!isoString) return '';
   const date = convertUTCDateToLocalDate(new Date(isoString));
 
   const pad = (num) => String(num).padStart(2, '0');
@@ -62,4 +62,33 @@ function convertUTCDateToLocalDate(date) {
   newDate.setHours(hours - offset);
 
   return newDate;   
+}
+
+export function extractUserIds(groups) {
+  const userIds = [];
+  for (const group of groups) {
+    if (group.members) {
+      for (const member of group.members) {
+        if (member.user_id !== undefined) {
+          userIds.push(member.user_id);
+        }
+      }
+    }
+  }
+  return userIds;
+}
+
+export function filterFoundedUsers(users, forbiddenUserIds) {
+  return users.filter(user => !forbiddenUserIds.includes(user.id));
+}
+
+export function getUserById(user_id, users) {
+  const user = users.find(msg => msg.id === user_id);
+  return user
+}
+
+export function getLastMessageByConversationId(conversationId, messages) {
+  const message = messages.find(msg => msg.conversation_id === conversationId);
+  console.log(messages);
+  return message
 }

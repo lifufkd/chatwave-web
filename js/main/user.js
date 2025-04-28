@@ -1,6 +1,9 @@
 import {API_TOKEN_LIFESPAN} from "../config.js";
 import { getProfileData, deleteUserProfile, updateUserProfile, updateUserAvatar, getUsersByQuery, getUserById } from "./api/user.js";
-import { renderProfileView, renderProfileEdit, clearFoundedUsers, renderFoundedUsers, renderConversatorProfile, renderChatHeader } from "./dom/user.js";
+import { selectUserConversations } from "./api/conversation.js";
+import { renderProfileView, renderProfileEdit, clearFoundedUsers, renderFoundedUsers } from "./dom/user.js";
+import { renderConversatorProfile, renderChatHeader } from "./dom/chat.js";
+import { extractUserIds, filterFoundedUsers } from "./utils.js";
 
 export function logout () {
     document.cookie = `access_token=; path=/; max-age=${API_TOKEN_LIFESPAN}; SameSite=Lax`;
@@ -137,14 +140,22 @@ export async function saveProfileChanges() {
 
 export async function searchUsers (search_query) {
     var founded_users = await getUsersByQuery(search_query, 10);
+    let existed_recipients = await selectUserConversations();
+    const userIds = extractUserIds(existed_recipients);
+    const filteredUsers = filterFoundedUsers(founded_users, userIds);
+
     clearFoundedUsers('desktop');
-    renderFoundedUsers(founded_users, 'desktop');
+    renderFoundedUsers(filteredUsers, 'desktop');
 }
 
 export async function searchUsersMobile (search_query) {
     var founded_users = await getUsersByQuery(search_query, 10);
+    let existed_recipients = await selectUserConversations();
+    const userIds = extractUserIds(existed_recipients);
+    const filteredUsers = filterFoundedUsers(founded_users, userIds);
+
     clearFoundedUsers('mobile');
-    renderFoundedUsers(founded_users, 'mobile');
+    renderFoundedUsers(filteredUsers, 'mobile');
 }
 
 export async function openNewChat(user_id) {
@@ -153,5 +164,6 @@ export async function openNewChat(user_id) {
     renderConversatorProfile(user_data[0]);
     renderChatHeader(user_data[0]);
     chat_obj.setAttribute('new', true);
+    chat_obj.setAttribute('recipient_id', user_data[0].id);
 
 }

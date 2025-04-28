@@ -1,5 +1,6 @@
 import {logout, DeleteUser, loadProfileData, processProfileChange, discardProfileChanges, saveProfileChanges, searchUsers, openNewChat, searchUsersMobile} from "./user.js";
 import { clearFoundedUsers } from "./dom/user.js";
+import { sendTextMessage, fetchConversationsLongPolling } from "./conversation.js";
 
 
 const avatarInput = document.getElementById('edit-avatar-input');
@@ -112,6 +113,14 @@ document.getElementById('SaveEditProfileBtn').addEventListener('click', function
 
 document.getElementById('CancelEditProfileBtn').addEventListener('click', function () {
   discardProfileChanges();
+});
+
+document.getElementById('chat-send-message-btn').addEventListener('click', function () {
+    sendTextMessage();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  fetchConversationsLongPolling();
 });
 
 
