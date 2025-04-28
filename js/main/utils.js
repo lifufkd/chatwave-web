@@ -78,6 +78,14 @@ export function extractUserIds(groups) {
   return userIds;
 }
 
+export function extractConversationsIds(conversations) {
+  const conversationsIds = [];
+  for (const conversation of conversations) {
+    conversationsIds.push(conversation.id)
+  }
+  return conversationsIds;
+}
+
 export function filterFoundedUsers(users, forbiddenUserIds) {
   return users.filter(user => !forbiddenUserIds.includes(user.id));
 }
@@ -89,6 +97,5 @@ export function getUserById(user_id, users) {
 
 export function getLastMessageByConversationId(conversationId, messages) {
   const message = messages.find(msg => msg.conversation_id === conversationId);
-  console.log(messages);
   return message
 }

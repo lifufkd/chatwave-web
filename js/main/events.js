@@ -43,9 +43,12 @@ clearBtn.addEventListener('click', () => {
 foundedUsersContainer.addEventListener('click', (event) => {
   const target = event.target.closest('div[id^="conversation-user-"]');
   if (target) {
-    const id = target.id.replace('conversation-user-', '');
+    let id = target.id.replace('conversation-user-', '');
+    if (id.endsWith('-mobile')) {
+      id = id.replace('-mobile', '');
+    }
     openNewChat(id);
-    chat_container.classList.remove("invisible")
+    chat_container.classList.remove("invisible");
   }
 });
 
@@ -76,22 +79,15 @@ clearBtnMobile.addEventListener('click', () => {
 foundedUsersContainerMobile.addEventListener('click', (event) => {
   const target = event.target.closest('div[id^="conversation-user-"]');
   if (target) {
-    const id = target.id.replace('conversation-user-', '');
+    let id = target.id.replace('conversation-user-', '');
+    if (id.endsWith('-mobile')) {
+      id = id.replace('-mobile', '');
+    }
     openNewChat(id);
     chat_container.classList.remove("invisible")
   }
 });
 
-
-
-
-avatarInput.addEventListener('change', () => {
-  if (avatarInput.files && avatarInput.files[0]) {
-      const file = avatarInput.files[0];
-      const imageUrl = URL.createObjectURL(file);
-      avatarPreview.src = imageUrl;
-  }
-});
 
 document.getElementById("logoutBtn").addEventListener("click", function () {
     logout();
@@ -121,6 +117,27 @@ document.getElementById('chat-send-message-btn').addEventListener('click', funct
 
 document.addEventListener('DOMContentLoaded', () => {
   fetchConversationsLongPolling();
+});
+
+avatarInput.addEventListener('change', () => {
+  if (avatarInput.files && avatarInput.files[0]) {
+      const file = avatarInput.files[0];
+      const imageUrl = URL.createObjectURL(file);
+      avatarPreview.src = imageUrl;
+  }
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  const messageInput = document.getElementById('chat-message-input');
+  const sendButton = document.getElementById('chat-send-message-btn');
+
+  messageInput.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter' && !event.shiftKey) { 
+          event.preventDefault(); // предотвращаем перенос строки
+          sendButton.click(); // кликаем по кнопке отправки
+      }
+  });
 });
 
 

@@ -60,7 +60,12 @@ export function renderFoundedUsers(users, version) {
     users.forEach(user => {
       const card = document.createElement('div');
       card.className = 'card conversation-card shadow border-0 mb-3 w-100 pointer-on-hover';
-      card.id = `conversation-user-${user.id}`;
+      if (version === 'desktop') {
+        card.id = `conversation-user-${user.id}`;
+      }
+      else if (version === 'mobile') {
+        card.id = `conversation-user-${user.id}-mobile`;
+      }
       const avatarUrl = user.avatar_name
         ? `${API_BASE_URL}/users/${removeExtension(user.avatar_name)}/avatar`
         : 'https://via.placeholder.com/100';
