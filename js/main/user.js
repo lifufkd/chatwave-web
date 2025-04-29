@@ -1,9 +1,12 @@
-import {API_TOKEN_LIFESPAN} from "../config.js";
+import { API_TOKEN_LIFESPAN, LONG_POLLING_DELAY } from "../config.js";
 import { getProfileData, deleteUserProfile, updateUserProfile, updateUserAvatar, getUsersByQuery, getUserById } from "./api/user.js";
 import { selectUserConversations } from "./api/conversation.js";
 import { renderProfileView, renderProfileEdit, clearFoundedUsers, renderFoundedUsers } from "./dom/user.js";
 import { renderChatHeader, renderConversatorProfile } from "./dom/chat.js";
 import { extractUserIds, filterFoundedUsers, getConversationById } from "./utils.js";
+
+
+let currentWatcherAbort = null;
 
 export function logout () {
     document.cookie = `access_token=; path=/; max-age=${API_TOKEN_LIFESPAN}; SameSite=Lax`;
@@ -158,11 +161,33 @@ export async function searchUsersMobile (search_query) {
     renderFoundedUsers(filteredUsers, 'mobile');
 }
 
+function fetchRecipientDataLongPolling(user_id) {
+    // Останавливаем предыдущий цикл
+    if (currentWatcherAbort) currentWatcherAbort.abort();
+    const abortController = new AbortController();
+    currentWatcherAbort = abortController;
+
+    (async function loop() {
+        let localUserData;
+
+        while (!abortController.signal.aborted) {
+            try {
+                const newUserData = await getUserById(user_id);
+                renderConversatorProfile(newUserData[0]);
+                renderChatHeader(newUserData[0]);
+                localUserData = newUserData[0];
+            } catch (e) {
+            }
+
+            await new Promise(resolve => setTimeout(resolve, LONG_POLLING_DELAY * 1000));
+        }
+    })();
+}
+
 export async function openNewChat(user_id) {
     var chat_obj = document.getElementById('chat-container');
     var user_data = await getUserById(user_id);
-    renderConversatorProfile(user_data[0]);
-    renderChatHeader(user_data[0]);
+    fetchRecipientDataLongPolling(user_id);
     chat_obj.setAttribute('new', true);
     chat_obj.setAttribute('recipient_id', user_data[0].id);
 }
@@ -171,10 +196,8 @@ export async function openChat(conversation_id) {
     var chat_obj = document.getElementById('chat-container');
     var conversations = await selectUserConversations();
     var currentConversation = getConversationById(conversation_id, conversations);
-    var user_data = await getUserById(currentConversation.members[0].user_id);
-    renderConversatorProfile(user_data[0]);
-    renderChatHeader(user_data[0]);
+    fetchRecipientDataLongPolling(currentConversation.members[0].user_id);
     chat_obj.setAttribute('new', false);
+    chat_obj.setAttribute('recipient_id', currentConversation.members[0].user_id);
     chat_obj.setAttribute('conversation_id', conversation_id);
-
 }

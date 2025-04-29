@@ -6,10 +6,29 @@ import { logout } from "../user.js";
 
 export async function insertTextMessage(content, conversation_id) {
     try {
-        await axios.post(`${API_BASE_URL}/conversations/${conversation_id}/text`,
+        let message = await axios.post(`${API_BASE_URL}/conversations/${conversation_id}/text`,
             {
                 "content": content
             },
+            {
+                headers: {
+                    Authorization: `Bearer ${getCookie("access_token")}`
+                }
+            });
+        return message.data;
+    } catch (error) {
+        if (error.response?.status === 401) {
+            logout();
+        } else {
+            showErrorToast(error);
+        }
+    }
+}
+
+export async function insertUnreadMessage(conversation_id, message_id, type, recipient_id) {
+    try {
+        await axios.post(`${API_BASE_URL}/conversations/${conversation_id}/entities/${message_id}?entity_type=${type}&users_ids=${recipient_id}`,
+            {},
             {
                 headers: {
                     Authorization: `Bearer ${getCookie("access_token")}`
@@ -84,7 +103,7 @@ export async function selectUserUnreadMessages() {
 
 export async function selectLastConversationMessage(conversation_id) {
     try {
-        let response = await axios.get(`${API_BASE_URL}/conversations/${conversation_id}/messages?limit=1`,
+        let response = await axios.get(`${API_BASE_URL}/conversations/${conversation_id}/messages/last`,
             {
                 headers: {
                     Authorization: `Bearer ${getCookie("access_token")}`
@@ -94,7 +113,10 @@ export async function selectLastConversationMessage(conversation_id) {
     } catch (error) {
         if (error.response?.status === 401) {
             logout();
-        } else {
+        } 
+        else if (error.response?.status === 404) {
+        }
+        else {
             showErrorToast(error);
         }
     }

@@ -1,4 +1,4 @@
-import { insertTextMessage, insertPrivateConversation, selectUserUnreadMessages, selectUserConversations, selectLastConversationMessage } from "./api/conversation.js";
+import { insertTextMessage, insertUnreadMessage, insertPrivateConversation, selectUserUnreadMessages, selectUserConversations, selectLastConversationMessage } from "./api/conversation.js";
 import { extractUserIds } from "./utils.js";
 import { getUsersByIds } from "./api/user.js";
 import { renderUserConversations} from "./dom/conversation.js";
@@ -17,10 +17,11 @@ export async function sendTextMessage () {
         if (new_conversation) {
             chat_container.setAttribute('conversation_id', new_conversation.id);
             chat_container.setAttribute('new', false);
-            await insertTextMessage(chat_message_input.value, new_conversation.id);
+            let message = await insertTextMessage(chat_message_input.value, new_conversation.id);
+            await insertUnreadMessage(new_conversation.id, message.id, "message", recipient_id);
 
-            let recipient_dektop = document.getElementById(`conversation-user-${chat_container.getAttribute("recipient_id")}`)
-            let recipient_mobile = document.getElementById(`conversation-user-${chat_container.getAttribute("recipient_id")}-mobile`)
+            let recipient_dektop = document.getElementById(`conversation-user-${chat_container.getAttribute("recipient_id")}`);
+            let recipient_mobile = document.getElementById(`conversation-user-${chat_container.getAttribute("recipient_id")}-mobile`);
 
             if (recipient_dektop) {
                 recipient_dektop.remove();
@@ -35,7 +36,8 @@ export async function sendTextMessage () {
     }
     else {
         let conversation_id = chat_container.getAttribute("conversation_id");
-        await insertTextMessage(chat_message_input.value, conversation_id);
+        let message = await insertTextMessage(chat_message_input.value, conversation_id);
+        await insertUnreadMessage(conversation_id, message.id, "message", recipient_id)
     }
 }
 
@@ -56,8 +58,8 @@ export async function fetchConversationsLongPolling() {
             let conversations_last_messages = [];
             for (const conversation of user_conversations) {
                 const last_conversation_message = await selectLastConversationMessage(conversation.id)
-                if (last_conversation_message.length > 0) {
-                    conversations_last_messages.push(last_conversation_message[0]);
+                if (last_conversation_message) {
+                    conversations_last_messages.push(last_conversation_message);
                 }
             }
 
