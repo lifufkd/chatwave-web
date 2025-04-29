@@ -90,6 +90,10 @@ export function filterFoundedUsers(users, forbiddenUserIds) {
   return users.filter(user => !forbiddenUserIds.includes(user.id));
 }
 
+export function getConversationById(id, conversations) {
+  return conversations.find(convo => Number(convo.id) === Number(id)) || null;
+}
+
 export function getUserById(user_id, users) {
   const user = users.find(msg => msg.id === user_id);
   return user

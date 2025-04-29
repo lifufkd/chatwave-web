@@ -1,5 +1,5 @@
 import {API_BASE_URL} from "../../config.js";
-import { removeExtension, getLastMessageByConversationId, formatChatDateTime, getUserById } from "../utils.js";
+import { removeExtension, getLastMessageByConversationId, formatChatDateTime, getUserById, reloadImage } from "../utils.js";
 
 
 export function renderUserConversations(conversations, unread_messages, last_messages, recipients) {
@@ -127,8 +127,11 @@ function updateConversationCard(card, recipient, lastMessage, unreadCount, avata
         lastMessageDateEl.textContent = formattedDate;
     }
 
-    if (avatarImgEl && avatarImgEl.src !== avatarUrl) {
+    if (avatarImgEl && avatarImgEl.src === "https://via.placeholder.com/100" && avatarUrl !== "https://via.placeholder.com/100") {
         avatarImgEl.src = avatarUrl;
+    }
+    else if (avatarImgEl.src !== "https://via.placeholder.com/100") {
+        reloadImage(avatarImgEl);
     }
 
     if (unreadCount > 0) {

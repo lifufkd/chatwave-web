@@ -2,8 +2,8 @@ import {API_TOKEN_LIFESPAN} from "../config.js";
 import { getProfileData, deleteUserProfile, updateUserProfile, updateUserAvatar, getUsersByQuery, getUserById } from "./api/user.js";
 import { selectUserConversations } from "./api/conversation.js";
 import { renderProfileView, renderProfileEdit, clearFoundedUsers, renderFoundedUsers } from "./dom/user.js";
-import { renderConversatorProfile, renderChatHeader } from "./dom/chat.js";
-import { extractUserIds, filterFoundedUsers } from "./utils.js";
+import { renderChatHeader, renderConversatorProfile } from "./dom/chat.js";
+import { extractUserIds, filterFoundedUsers, getConversationById } from "./utils.js";
 
 export function logout () {
     document.cookie = `access_token=; path=/; max-age=${API_TOKEN_LIFESPAN}; SameSite=Lax`;
@@ -165,5 +165,16 @@ export async function openNewChat(user_id) {
     renderChatHeader(user_data[0]);
     chat_obj.setAttribute('new', true);
     chat_obj.setAttribute('recipient_id', user_data[0].id);
+}
+
+export async function openChat(conversation_id) {
+    var chat_obj = document.getElementById('chat-container');
+    var conversations = await selectUserConversations();
+    var currentConversation = getConversationById(conversation_id, conversations);
+    var user_data = await getUserById(currentConversation.members[0].user_id);
+    renderConversatorProfile(user_data[0]);
+    renderChatHeader(user_data[0]);
+    chat_obj.setAttribute('new', false);
+    chat_obj.setAttribute('conversation_id', conversation_id);
 
 }
