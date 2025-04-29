@@ -1,6 +1,6 @@
-import {logout, DeleteUser, loadProfileData, processProfileChange, discardProfileChanges, saveProfileChanges, searchUsers, openNewChat, searchUsersMobile} from "./user.js";
+import {logout, DeleteUser, loadProfileData, processProfileChange, discardProfileChanges, saveProfileChanges, searchUsers, openChat, openNewChat, searchUsersMobile} from "./user.js";
 import { clearFoundedUsers } from "./dom/user.js";
-import { sendTextMessage, fetchConversationsLongPolling } from "./conversation.js";
+import { sendTextMessage, fetchConversationsLongPolling, removeConversation, removeConversationMessages } from "./conversation.js";
 
 
 const avatarInput = document.getElementById('edit-avatar-input');
@@ -14,10 +14,13 @@ const searchInputMobile = document.getElementById('search-input-mobile');
 const clearBtnMobile = document.getElementById('clear-search-mobile-btn');
 const foundedUsersContainerMobile = document.getElementById('founded-users-container-mobile');
 
+const conversations_conteiner = document.getElementById('conversations-container');
+const conversations_conteiner_mobile = document.getElementById('conversations-container-mobile');
+
 const chat_container = document.getElementById('chat-container');
 
 
-// Desktop
+// Desktop search
 searchInput.addEventListener('input', () => {
   if (searchInput.value.length >= 3) {
     searchUsers(searchInput.value);
@@ -53,7 +56,7 @@ foundedUsersContainer.addEventListener('click', (event) => {
 });
 
 
-// Mobile
+// Mobile search
 searchInputMobile.addEventListener('input', () => {
   if (searchInputMobile.value.length >= 3) {
     searchUsersMobile(searchInputMobile.value);
@@ -88,6 +91,33 @@ foundedUsersContainerMobile.addEventListener('click', (event) => {
   }
 });
 
+// Conversations
+
+conversations_conteiner.addEventListener('click', (event) => {
+  const target = event.target.closest('div[id^="conversation-"]');
+  if (target) {
+    let id = target.id.replace('conversation-', '');
+    if (id.endsWith('-mobile')) {
+      id = id.replace('-mobile', '');
+    }
+    openChat(id);
+    chat_container.classList.remove("invisible")
+  }
+});
+
+
+conversations_conteiner_mobile.addEventListener('click', (event) => {
+  const target = event.target.closest('div[id^="conversation-"]');
+  if (target) {
+    let id = target.id.replace('conversation-', '');
+    if (id.endsWith('-mobile')) {
+      id = id.replace('-mobile', '');
+    }
+    openChat(id);
+    chat_container.classList.remove("invisible")
+  }
+});
+
 
 document.getElementById("logoutBtn").addEventListener("click", function () {
     logout();
@@ -113,6 +143,14 @@ document.getElementById('CancelEditProfileBtn').addEventListener('click', functi
 
 document.getElementById('chat-send-message-btn').addEventListener('click', function () {
     sendTextMessage();
+});
+
+document.getElementById('DeleteConversationBtn').addEventListener('click', function () {
+  removeConversation();
+});
+
+document.getElementById('ClearConversationBtn').addEventListener('click', function () {
+    removeConversationMessages();
 });
 
 document.addEventListener('DOMContentLoaded', () => {

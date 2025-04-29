@@ -3,6 +3,7 @@ import { extractUserIds } from "./utils.js";
 import { getUsersByIds } from "./api/user.js";
 import { renderUserConversations} from "./dom/conversation.js";
 import { LONG_POLLING_DELAY } from "../config.js";
+import { deleteConversationMessages, deleteConversation } from "./api/chat.js";
 
 export async function sendTextMessage () {
     let chat_container = document.getElementById('chat-container');
@@ -66,5 +67,17 @@ export async function fetchConversationsLongPolling() {
 
         await new Promise(resolve => setTimeout(resolve, LONG_POLLING_DELAY * 1000));
     }
+}
+
+export async function removeConversation () {
+    const chat_container = document.getElementById('chat-container');
+    const conversation_id = chat_container.getAttribute("conversation_id");
+    await deleteConversation(conversation_id);
+}
+
+export async function removeConversationMessages () {
+    const chat_container = document.getElementById('chat-container');
+    const conversation_id = chat_container.getAttribute("conversation_id");
+    await deleteConversationMessages(conversation_id);
 }
 
