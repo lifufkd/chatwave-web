@@ -127,7 +127,7 @@ function updateConversationCard(card, recipient, lastMessage, unreadCount, avata
         lastMessageDateEl.textContent = formattedDate;
     }
 
-    if (avatarImgEl && avatarImgEl.src === "https://via.placeholder.com/100" && avatarUrl !== "https://via.placeholder.com/100") {
+    if (avatarImgEl && avatarImgEl.src.split("?")[0] !== avatarUrl) {
         avatarImgEl.src = avatarUrl;
     }
     else if (avatarImgEl.src !== "https://via.placeholder.com/100") {
