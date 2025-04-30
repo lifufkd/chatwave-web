@@ -69,3 +69,56 @@ export function renderChatHeader(user_data) {
         lastOnlineEl.innerHTML = newLastOnline;
     }
 }
+
+export function clearMessages() {
+    const container = document.getElementById('messages-container');
+    container.innerHTML = "";
+}
+
+export function clearInputField() {
+    const field = document.getElementById('chat-message-input');
+    field.value = "";
+}
+
+export function renderMessage(msg, user, recipient) {
+    let avatarUrl;
+    const container = document.getElementById('messages-container');
+    const existing = document.getElementById(`msg-${msg.id}`);
+
+    const contentText = msg.content;
+    const time = formatChatDateTime(msg.updated_at || msg.created_at);
+    const isMine = msg.sender_id === user.id;
+
+    const alignment = isMine ? 'justify-content-end' : '';
+    const statusClass = isMine
+        ? `sent${msg.status === 'delivered' ? ' border border-2 delivered' : msg.status === 'read' ? ' border border-2 read' : ''}`
+        : 'recieved read';
+
+    if (isMine) {
+        avatarUrl = user?.avatar_name
+            ? `${API_BASE_URL}/users/${removeExtension(user.avatar_name)}/avatar`
+            : 'https://via.placeholder.com/100';
+    }
+    else {
+        avatarUrl = recipient?.avatar_name
+            ? `${API_BASE_URL}/users/${removeExtension(recipient.avatar_name)}/avatar`
+            : 'https://via.placeholder.com/100';
+    }
+
+    const messageHtml = `
+        <div id="msg-${msg.id}" class="d-flex align-items-start m-2 ${alignment}">
+          <div class="avatar-container me-2">
+            <img src="${avatarUrl}" class="avatar border border-2" alt="User avatar">
+          </div>
+          <div class="rounded-4 px-3 py-2 d-flex flex-column message-container ${statusClass}">
+            <span class="text-start w-100">${contentText}</span>
+            <small class="secondary-text-style ms-2 text-end w-100">${time}</small>
+          </div>
+        </div>`;
+
+    if (existing) {
+        existing.outerHTML = messageHtml;
+    } else {
+        container.insertAdjacentHTML('beforeend', messageHtml);
+    }
+}

@@ -4,7 +4,7 @@ import { selectUserConversations } from "./api/conversation.js";
 import { renderProfileView, renderProfileEdit, clearFoundedUsers, renderFoundedUsers } from "./dom/user.js";
 import { renderChatHeader, renderConversatorProfile } from "./dom/chat.js";
 import { extractUserIds, filterFoundedUsers, getConversationById } from "./utils.js";
-
+import { fetchMessagesLongPolling } from "./chat.js";
 
 let currentWatcherAbort = null;
 
@@ -197,6 +197,7 @@ export async function openChat(conversation_id) {
     var conversations = await selectUserConversations();
     var currentConversation = getConversationById(conversation_id, conversations);
     fetchRecipientDataLongPolling(currentConversation.members[0].user_id);
+    fetchMessagesLongPolling(conversation_id, currentConversation.members[0].user_id);
     chat_obj.setAttribute('new', false);
     chat_obj.setAttribute('recipient_id', currentConversation.members[0].user_id);
     chat_obj.setAttribute('conversation_id', conversation_id);

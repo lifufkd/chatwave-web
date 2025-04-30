@@ -39,3 +39,21 @@ export async function deleteConversation(conversation_id) {
         }
     }
 }
+
+export async function fetchMessages(conversation_id, limit, offset) {
+    try {
+        let response = await axios.get(`${API_BASE_URL}/conversations/${conversation_id}/messages?=limit=${limit}&offset=${offset}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${getCookie("access_token")}`
+                }
+            });
+        return response.data;
+    } catch (error) {
+        if (error.response?.status === 401) {
+            logout();
+        } else {
+            showErrorToast(error);
+        }
+    }
+}
