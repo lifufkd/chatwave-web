@@ -74,6 +74,7 @@ export async function fetchConversationsLongPolling() {
 export async function removeConversation () {
     const chat_container = document.getElementById('chat-container');
     const conversation_id = chat_container.getAttribute("conversation_id");
+    chat_container.classList.add("invisible");
     await deleteConversation(conversation_id);
 }
 
