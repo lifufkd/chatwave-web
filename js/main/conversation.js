@@ -2,7 +2,7 @@ import { insertTextMessage, insertUnreadMessage, insertPrivateConversation, sele
 import { extractUserIds } from "./utils.js";
 import { getUsersByIds } from "./api/user.js";
 import { renderUserConversations} from "./dom/conversation.js";
-import { clearMessages, clearInputField } from "./dom/chat.js";
+import { clearMessages, clearInputField, makeChatInvisible, makeChatVisible } from "./dom/chat.js";
 import { LONG_POLLING_DELAY } from "../config.js";
 import { deleteConversationMessages, deleteConversation } from "./api/chat.js";
 import { fetchMessagesLongPolling } from "./chat.js";
@@ -14,6 +14,10 @@ export async function sendTextMessage () {
     let chat_status = chat_container.getAttribute("new");
     let recipient_id = chat_container.getAttribute("recipient_id");
 
+    if (chat_message_input.value.length === 0) {
+        return;
+    }
+
     if (chat_status === "true") {
         let new_conversation = await insertPrivateConversation(recipient_id);
         if (new_conversation) {
@@ -21,8 +25,8 @@ export async function sendTextMessage () {
             chat_container.setAttribute('conversation_id', new_conversation.id);
             chat_container.setAttribute('new', false);
             let message = await insertTextMessage(chat_message_input.value, new_conversation.id);
-            chat_message_input.value = "";
             await insertUnreadMessage(new_conversation.id, message.id, "message", recipient_id);
+            clearInputField();
 
             let recipient_dektop = document.getElementById(`conversation-user-${chat_container.getAttribute("recipient_id")}`);
             let recipient_mobile = document.getElementById(`conversation-user-${chat_container.getAttribute("recipient_id")}-mobile`);
@@ -43,7 +47,7 @@ export async function sendTextMessage () {
         fetchMessagesLongPolling(conversation_id, recipient_id);
         let message = await insertTextMessage(chat_message_input.value, conversation_id);
         await insertUnreadMessage(conversation_id, message.id, "message", recipient_id);
-        chat_message_input.value = "";
+        clearInputField();
     }
 }
 
@@ -80,7 +84,7 @@ export async function fetchConversationsLongPolling() {
 export async function removeConversation () {
     const chat_container = document.getElementById('chat-container');
     const conversation_id = chat_container.getAttribute("conversation_id");
-    chat_container.classList.add("invisible");
+    makeChatInvisible();
     clearInputField();
     clearMessages();
     await deleteConversation(conversation_id);

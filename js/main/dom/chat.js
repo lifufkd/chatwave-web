@@ -1,18 +1,15 @@
 import { formatDate, formatDateTime } from "../utils.js";
 import {API_BASE_URL} from "../../config.js";
-import { removeExtension, reloadImage, formatChatDateTime } from "../utils.js";
+import { formatChatDateTime } from "../utils.js";
 
 export function renderConversatorProfile(user_data) {
     const avatarUrl = user_data.avatar_name
-        ? `${API_BASE_URL}/users/${removeExtension(user_data.avatar_name)}/avatar`
+        ? `${API_BASE_URL}/users/avatar/${user_data.avatar_name}`
         : 'https://via.placeholder.com/100';
 
     const avatarEl = document.getElementById('user-profile-avatar');
-    if (avatarEl && avatarEl.src.split("?")[0] !== avatarUrl) {
+    if (avatarEl && avatarEl.src !== avatarUrl) {
         avatarEl.src = avatarUrl;
-    }
-    else if (avatarEl.src !== "https://via.placeholder.com/100") {
-        reloadImage(avatarEl);
     }
 
     const nicknameEl = document.getElementById('user-profile-nickname');
@@ -47,15 +44,12 @@ export function renderConversatorProfile(user_data) {
 
 export function renderChatHeader(user_data) {
     const avatarUrl = user_data.avatar_name
-        ? `${API_BASE_URL}/users/${removeExtension(user_data.avatar_name)}/avatar`
+        ? `${API_BASE_URL}/users/avatar/${user_data.avatar_name}`
         : 'https://via.placeholder.com/100';
 
     const avatarEl = document.getElementById('chat-avatar');
-    if (avatarEl && avatarEl.src.split("?")[0] !== avatarUrl) {
+    if (avatarEl && avatarEl.src !== avatarUrl) {
         avatarEl.src = avatarUrl;
-    }
-    else if (avatarEl.src !== "https://via.placeholder.com/100") {
-        reloadImage(avatarEl);
     }
 
     const nicknameEl = document.getElementById('chat-nickname');
@@ -80,6 +74,16 @@ export function clearInputField() {
     field.value = "";
 }
 
+export function makeChatInvisible() {
+    const chat_container = document.getElementById('chat-container');
+    chat_container.classList.add("invisible");
+}
+
+export function makeChatVisible() {
+    const chat_container = document.getElementById('chat-container');
+    chat_container.classList.remove("invisible");
+}
+
 export function renderMessage(msg, user, recipient) {
     let avatarUrl;
     const container = document.getElementById('messages-container');
@@ -96,12 +100,12 @@ export function renderMessage(msg, user, recipient) {
 
     if (isMine) {
         avatarUrl = user?.avatar_name
-            ? `${API_BASE_URL}/users/${removeExtension(user.avatar_name)}/avatar`
+            ? `${API_BASE_URL}/users/avatar/${user.avatar_name}`
             : 'https://via.placeholder.com/100';
     }
     else {
         avatarUrl = recipient?.avatar_name
-            ? `${API_BASE_URL}/users/${removeExtension(recipient.avatar_name)}/avatar`
+            ? `${API_BASE_URL}/users/avatar/${recipient.avatar_name}`
             : 'https://via.placeholder.com/100';
     }
 

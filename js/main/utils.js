@@ -43,16 +43,6 @@ export function formatChatDateTime(isoString) {
 }
 
 
-export function removeExtension(filename) {
-  return filename.split('.').slice(0, -1).join('.');
-}
-
-
-export function reloadImage(image_obj) {
-  const currentSrc = image_obj.src.split('?')[0]; // убираем старые параметры если были
-  image_obj.src = `${currentSrc}?t=${new Date().getTime()}`; // добавляем метку времени
-}
-
 function convertUTCDateToLocalDate(date) {
   var newDate = new Date(date.getTime()+date.getTimezoneOffset()*60*1000);
 

@@ -1,5 +1,5 @@
 import {API_BASE_URL} from "../../config.js";
-import { removeExtension, getLastMessageByConversationId, formatChatDateTime, getUserById, reloadImage } from "../utils.js";
+import { getLastMessageByConversationId, formatChatDateTime, getUserById } from "../utils.js";
 
 
 export function renderUserConversations(conversations, unread_messages, last_messages, recipients) {
@@ -44,7 +44,7 @@ export function renderUserConversations(conversations, unread_messages, last_mes
         const lastMessage = getLastMessageByConversationId(convo.id, last_messages);
         const recipient = getUserById(convo.members[0].user_id, recipients);
         const avatarUrl = recipient.avatar_name
-            ? `${API_BASE_URL}/users/${removeExtension(recipient.avatar_name)}/avatar`
+            ? `${API_BASE_URL}/users/avatar/${recipient.avatar_name}`
             : 'https://via.placeholder.com/100';
 
         if (desktopCard && mobileCard) {
@@ -127,11 +127,8 @@ function updateConversationCard(card, recipient, lastMessage, unreadCount, avata
         lastMessageDateEl.textContent = formattedDate;
     }
 
-    if (avatarImgEl && avatarImgEl.src.split("?")[0] !== avatarUrl) {
+    if (avatarImgEl && avatarImgEl.src !== avatarUrl) {
         avatarImgEl.src = avatarUrl;
-    }
-    else if (avatarImgEl.src !== "https://via.placeholder.com/100") {
-        reloadImage(avatarImgEl);
     }
 
     if (unreadCount > 0) {

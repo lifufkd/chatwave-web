@@ -52,7 +52,11 @@ export async function fetchMessages(conversation_id, limit, offset) {
     } catch (error) {
         if (error.response?.status === 401) {
             logout();
-        } else {
+        }
+        else if (error.response?.status === 404) {
+            return;
+        }
+        else {
             showErrorToast(error);
         }
     }

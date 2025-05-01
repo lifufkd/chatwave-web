@@ -165,7 +165,6 @@ avatarInput.addEventListener('change', () => {
   }
 });
 
-
 document.addEventListener('DOMContentLoaded', function() {
   const messageInput = document.getElementById('chat-message-input');
   const sendButton = document.getElementById('chat-send-message-btn');
@@ -176,6 +175,14 @@ document.addEventListener('DOMContentLoaded', function() {
           sendButton.click(); // кликаем по кнопке отправки
       }
   });
+});
+
+chat_container.addEventListener('scroll', () => {
+  if (chat_container.scrollTop === 0) {
+    console.log('Достигнута верхняя граница прокрутки');
+    // Здесь можно вызывать функцию загрузки старых сообщений, например:
+    // loadOlderMessages();
+  }
 });
 
 

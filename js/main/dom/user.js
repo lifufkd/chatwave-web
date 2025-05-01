@@ -1,15 +1,13 @@
 import { formatDate, formatDateTime } from "../utils.js";
 import {API_BASE_URL} from "../../config.js";
-import { removeExtension, reloadImage, formatChatDateTime } from "../utils.js";
 
 export function renderProfileView(user_data) {
     const avatarUrl = user_data.avatar_name
-        ? `${API_BASE_URL}/users/${removeExtension(user_data.avatar_name)}/avatar`
+        ? `${API_BASE_URL}/users/avatar/${user_data.avatar_name}`
         : 'https://via.placeholder.com/100';
 
     var profile_avatar_obj = document.getElementById('my-profile-avatar');
     profile_avatar_obj.src = avatarUrl;
-    reloadImage(profile_avatar_obj);
     document.getElementById('my-profile-nickname').textContent = user_data.nickname || 'No nickname';
     document.getElementById('my-profile-login').innerHTML = `<strong>Login:</strong> ${user_data.username || '—'}`;
     document.getElementById('my-profile-bio').innerHTML = `<strong>Bio:</strong> ${user_data.bio || '—'}`;
@@ -22,11 +20,10 @@ export function renderProfileView(user_data) {
 
 export function renderProfileEdit(user_data) {
     const avatarUrl = user_data.avatar_name
-        ? `${API_BASE_URL}/users/${removeExtension(user_data.avatar_name)}/avatar`
+        ? `${API_BASE_URL}/users/avatar/${user_data.avatar_name}`
         : 'https://via.placeholder.com/100';
     var edit_profile_avatar_obj = document.getElementById('edit-avatar-preview');
     edit_profile_avatar_obj.src = avatarUrl;
-    reloadImage(edit_profile_avatar_obj);
     document.getElementById('edit-nickname').placeholder = user_data.nickname || '';
     document.getElementById('edit-bio').placeholder = user_data.bio || '';
     document.getElementById('edit-birthday').placeholder = formatDate(user_data.birthday);
@@ -67,7 +64,7 @@ export function renderFoundedUsers(users, version) {
         card.id = `conversation-user-${user.id}-mobile`;
       }
       const avatarUrl = user.avatar_name
-        ? `${API_BASE_URL}/users/${removeExtension(user.avatar_name)}/avatar`
+        ? `${API_BASE_URL}/users/avatar/${user.avatar_name}`
         : 'https://via.placeholder.com/100';
   
       card.innerHTML = `
