@@ -4,6 +4,7 @@ import { getUserById, getProfileData } from "./api/user.js";
 import { insertPrivateConversation } from "./api/conversation.js";
 import { fetchMessages, insertTextMessage, insertUnreadMessage, deleteConversationMessages, deleteConversation } from "./api/chat.js";
 import { scrollState } from "./events.js";
+import { escapeHTML } from "./utils.js";
 
 
 let currentMessagesWatcherAbort = null;
@@ -94,7 +95,7 @@ export async function sendTextMessage () {
             fetchMessagesLongPolling(new_conversation.id, recipient_id);
             chat_container.setAttribute('conversation_id', new_conversation.id);
             chat_container.setAttribute('new', false);
-            let message = await insertTextMessage(chat_message_input.value, new_conversation.id);
+            let message = await insertTextMessage(escapeHTML(chat_message_input.value), new_conversation.id);
             await insertUnreadMessage(new_conversation.id, message.id, "message", recipient_id);
             clearInputField();
             scrollChatDown();
@@ -115,7 +116,7 @@ export async function sendTextMessage () {
     }
     else {
         let conversation_id = chat_container.getAttribute("conversation_id");
-        let message = await insertTextMessage(chat_message_input.value, conversation_id);
+        let message = await insertTextMessage(escapeHTML(chat_message_input.value), conversation_id);
         await insertUnreadMessage(conversation_id, message.id, "message", recipient_id);
         clearInputField();
         scrollChatDown();

@@ -93,3 +93,12 @@ export function getLastMessageByConversationId(conversationId, messages) {
   const message = messages.find(msg => msg.conversation_id === conversationId);
   return message
 }
+
+export function escapeHTML(str) {
+  return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+}
