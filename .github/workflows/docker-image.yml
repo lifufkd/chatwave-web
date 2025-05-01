@@ -19,9 +19,7 @@ jobs:
       - name: Extract version from package.json
         id: version
         run: |
-          VERSION=$(jq -r .version package.json)
-          echo "VERSION=$VERSION"
-          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "VERSION=$(jq -r .version package.json)" >> "$GITHUB_OUTPUT"
 
       - name: Log in to GitHub Container Registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
