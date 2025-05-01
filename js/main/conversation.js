@@ -1,56 +1,14 @@
-import { insertTextMessage, insertUnreadMessage, insertPrivateConversation, selectUserUnreadMessages, selectUserConversations, selectLastConversationMessage } from "./api/conversation.js";
-import { extractUserIds } from "./utils.js";
-import { getUsersByIds } from "./api/user.js";
-import { renderUserConversations} from "./dom/conversation.js";
-import { clearMessages, clearInputField, makeChatInvisible, scrollChatDown } from "./dom/chat.js";
+import { selectUserConversations } from "./api/conversation.js";
+import { selectLastConversationMessage, selectUserUnreadMessages } from "./api/chat.js";
+import { fetchMessagesLongPolling, stopFetchMessagesLongPolling } from "./chat.js";
+import { extractUserIds, getConversationById } from "./utils.js";
+import { fetchRecipientDataLongPolling } from "./user.js";
+import { getUsersByIds, getUserById } from "./api/user.js";
+import { renderUserConversations } from "./dom/conversation.js";
+import { clearMessages, clearInputField } from "./dom/chat.js";
 import { LONG_POLLING_DELAY } from "../config.js";
-import { deleteConversationMessages, deleteConversation } from "./api/chat.js";
-import { fetchMessagesLongPolling } from "./chat.js";
+import { scrollState } from "./events.js";
 
-export async function sendTextMessage () {
-    let chat_container = document.getElementById('chat-container');
-    let chat_message_input = document.getElementById('chat-message-input');
-
-    let chat_status = chat_container.getAttribute("new");
-    let recipient_id = chat_container.getAttribute("recipient_id");
-
-    if (chat_message_input.value.length === 0) {
-        return;
-    }
-
-    if (chat_status === "true") {
-        let new_conversation = await insertPrivateConversation(recipient_id);
-        if (new_conversation) {
-            fetchMessagesLongPolling(new_conversation.id, recipient_id);
-            chat_container.setAttribute('conversation_id', new_conversation.id);
-            chat_container.setAttribute('new', false);
-            let message = await insertTextMessage(chat_message_input.value, new_conversation.id);
-            await insertUnreadMessage(new_conversation.id, message.id, "message", recipient_id);
-            clearInputField();
-            scrollChatDown();
-
-            let recipient_dektop = document.getElementById(`conversation-user-${chat_container.getAttribute("recipient_id")}`);
-            let recipient_mobile = document.getElementById(`conversation-user-${chat_container.getAttribute("recipient_id")}-mobile`);
-
-            if (recipient_dektop) {
-                recipient_dektop.remove();
-            }
-            if (recipient_mobile) {
-                recipient_mobile.remove();
-            }
-        }
-        else {
-            return;
-        }
-    }
-    else {
-        let conversation_id = chat_container.getAttribute("conversation_id");
-        let message = await insertTextMessage(chat_message_input.value, conversation_id);
-        await insertUnreadMessage(conversation_id, message.id, "message", recipient_id);
-        clearInputField();
-        scrollChatDown();
-    }
-}
 
 export async function fetchConversationsLongPolling() {
     while (true) {
@@ -82,20 +40,31 @@ export async function fetchConversationsLongPolling() {
     }
 }
 
-export async function removeConversation () {
-    const chat_container = document.getElementById('chat-container');
-    const conversation_id = chat_container.getAttribute("conversation_id");
-    makeChatInvisible();
+export async function openNewChat(user_id) {
+    var chat_obj = document.getElementById('chat-container');
+    var user_data = await getUserById(user_id);
+    stopFetchMessagesLongPolling();
+    scrollState.loadCount = 1;
     clearInputField();
     clearMessages();
-    await deleteConversation(conversation_id);
+
+    fetchRecipientDataLongPolling(user_id);
+    chat_obj.setAttribute('new', true);
+    chat_obj.setAttribute('recipient_id', user_data[0].id);
 }
 
-export async function removeConversationMessages () {
-    const chat_container = document.getElementById('chat-container');
-    const conversation_id = chat_container.getAttribute("conversation_id");
+export async function openChat(conversation_id) {
+    var chat_obj = document.getElementById('chat-container');
+    var conversations = await selectUserConversations();
+    var currentConversation = getConversationById(conversation_id, conversations);
+    scrollState.loadCount = 1;
     clearInputField();
     clearMessages();
-    await deleteConversationMessages(conversation_id);
+
+    fetchRecipientDataLongPolling(currentConversation.members[0].user_id);
+    fetchMessagesLongPolling(conversation_id, currentConversation.members[0].user_id);
+    chat_obj.setAttribute('new', false);
+    chat_obj.setAttribute('recipient_id', currentConversation.members[0].user_id);
+    chat_obj.setAttribute('conversation_id', conversation_id);
 }
 

@@ -1,10 +1,11 @@
-import {logout, DeleteUser, loadProfileData, processProfileChange, discardProfileChanges, saveProfileChanges, searchUsers, openChat, openNewChat, searchUsersMobile} from "./user.js";
+import {logout, DeleteUser, loadProfileData, processProfileChange, discardProfileChanges, saveProfileChanges, searchUsers, searchUsersMobile} from "./user.js";
+import { removeConversation, removeConversationMessages, knownMessages, sendTextMessage } from "./chat.js";
+import { openChat, openNewChat, fetchConversationsLongPolling } from "./conversation.js";
 import { clearFoundedUsers } from "./dom/user.js";
 import { clearMessages } from "./dom/chat.js";
-import { knownMessages } from "./chat.js";
-import { sendTextMessage, fetchConversationsLongPolling, removeConversation, removeConversationMessages } from "./conversation.js";
 
-
+const openProfileBtn = document.getElementById("OpenProfileBtn");
+const settingsModalEl = document.getElementById('SettingsModal');
 const avatarInput = document.getElementById('edit-avatar-input');
 const avatarPreview = document.getElementById('edit-avatar-preview');
 
@@ -192,6 +193,13 @@ messages_container.addEventListener('scroll', () => {
     knownMessages.clear();
     scrollState.loadCount += 1;
   }
+});
+
+openProfileBtn.addEventListener("click", () => {
+  settingsModalEl.addEventListener('hidden.bs.modal', () => {
+    const profileModal = new bootstrap.Modal(document.getElementById('MyProfileModal'));
+    profileModal.show();
+  }, { once: true });
 });
 
 

@@ -1,6 +1,6 @@
+import {showSuccsessToast, showErrorToast} from "../../toasts.js";
 import {API_BASE_URL} from "../../config.js";
 import { getCookie } from "../utils.js";
-import {showSuccsessToast, showErrorToast} from "../../toasts.js";
 import { logout } from "../user.js";
 
 export async function getProfileData() {
@@ -68,7 +68,6 @@ export async function updateUserAvatar (form_data) {
                     Authorization: `Bearer ${getCookie("access_token")}`
                 }
             });
-        showSuccsessToast('Avatar updated successfully');
     } catch (error) {
         if (error.response?.status === 401) {
             logout();
