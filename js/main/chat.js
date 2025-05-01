@@ -1,23 +1,38 @@
 import { getUserById, getProfileData } from "./api/user.js";
-import { renderMessage, makeChatInvisible, clearInputField, clearMessages } from "./dom/chat.js";
+import { renderMessage, makeChatInvisible, clearInputField, clearMessages, scrollChatDown } from "./dom/chat.js";
 import { DEFAULT_MESSAGES_QUANTITY, LONG_POLLING_DELAY } from "../config.js";
 import { fetchMessages } from "./api/chat.js";
+import { scrollState } from "./events.js";
 
 
 let currentMessagesWatcherAbort = null;
+let LOAD_MESSAGES_QUANTITY = DEFAULT_MESSAGES_QUANTITY;
+export const knownMessages = new Map();
+
+
+export function stopFetchMessagesLongPolling() {
+    if (currentMessagesWatcherAbort) {
+        currentMessagesWatcherAbort.abort();
+        currentMessagesWatcherAbort = null;
+    }
+}
+
 
 export function fetchMessagesLongPolling(conversation_id, recipient_id) {
     if (currentMessagesWatcherAbort) currentMessagesWatcherAbort.abort();
     const abortController = new AbortController();
+    let firstItteration = true;
     currentMessagesWatcherAbort = abortController;
 
-    const knownMessages = new Map();
+    knownMessages.clear();
 
     (async function loop() {
         while (!abortController.signal.aborted) {
             const newIds = new Set();
 
-            const messages = await fetchMessages(conversation_id, DEFAULT_MESSAGES_QUANTITY, 0);
+            const messages = await fetchMessages(conversation_id, LOAD_MESSAGES_QUANTITY * scrollState.loadCount, 0);
+            console.log(LOAD_MESSAGES_QUANTITY);
+            console.log(scrollState.loadCount);
             if (!messages) {
                 makeChatInvisible();
                 clearInputField();
@@ -51,6 +66,11 @@ export function fetchMessagesLongPolling(conversation_id, recipient_id) {
                     const el = document.getElementById(`msg-${id}`);
                     if (el) el.remove();
                 }
+            }
+
+            if (firstItteration) {
+                firstItteration = false;
+                scrollChatDown();
             }
 
             await new Promise(res => setTimeout(res, LONG_POLLING_DELAY * 1000));

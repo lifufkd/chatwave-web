@@ -1,5 +1,7 @@
 import {logout, DeleteUser, loadProfileData, processProfileChange, discardProfileChanges, saveProfileChanges, searchUsers, openChat, openNewChat, searchUsersMobile} from "./user.js";
 import { clearFoundedUsers } from "./dom/user.js";
+import { clearMessages } from "./dom/chat.js";
+import { knownMessages } from "./chat.js";
 import { sendTextMessage, fetchConversationsLongPolling, removeConversation, removeConversationMessages } from "./conversation.js";
 
 
@@ -18,6 +20,12 @@ const conversations_conteiner = document.getElementById('conversations-container
 const conversations_conteiner_mobile = document.getElementById('conversations-container-mobile');
 
 const chat_container = document.getElementById('chat-container');
+const messages_container = document.getElementById('messages-container');
+
+
+export const scrollState = {
+  loadCount: 1
+};
 
 
 // Desktop search
@@ -177,13 +185,15 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-chat_container.addEventListener('scroll', () => {
-  if (chat_container.scrollTop === 0) {
-    console.log('Достигнута верхняя граница прокрутки');
-    // Здесь можно вызывать функцию загрузки старых сообщений, например:
-    // loadOlderMessages();
+messages_container.addEventListener('scroll', () => {
+  const hasVerticalScroll = messages_container.scrollHeight > messages_container.clientHeight;
+  if (hasVerticalScroll && messages_container.scrollTop === 0) {
+    clearMessages();
+    knownMessages.clear();
+    scrollState.loadCount += 1;
   }
 });
+
 
 
 

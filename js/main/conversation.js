@@ -2,7 +2,7 @@ import { insertTextMessage, insertUnreadMessage, insertPrivateConversation, sele
 import { extractUserIds } from "./utils.js";
 import { getUsersByIds } from "./api/user.js";
 import { renderUserConversations} from "./dom/conversation.js";
-import { clearMessages, clearInputField, makeChatInvisible, makeChatVisible } from "./dom/chat.js";
+import { clearMessages, clearInputField, makeChatInvisible, scrollChatDown } from "./dom/chat.js";
 import { LONG_POLLING_DELAY } from "../config.js";
 import { deleteConversationMessages, deleteConversation } from "./api/chat.js";
 import { fetchMessagesLongPolling } from "./chat.js";
@@ -27,6 +27,7 @@ export async function sendTextMessage () {
             let message = await insertTextMessage(chat_message_input.value, new_conversation.id);
             await insertUnreadMessage(new_conversation.id, message.id, "message", recipient_id);
             clearInputField();
+            scrollChatDown();
 
             let recipient_dektop = document.getElementById(`conversation-user-${chat_container.getAttribute("recipient_id")}`);
             let recipient_mobile = document.getElementById(`conversation-user-${chat_container.getAttribute("recipient_id")}-mobile`);
@@ -44,10 +45,10 @@ export async function sendTextMessage () {
     }
     else {
         let conversation_id = chat_container.getAttribute("conversation_id");
-        fetchMessagesLongPolling(conversation_id, recipient_id);
         let message = await insertTextMessage(chat_message_input.value, conversation_id);
         await insertUnreadMessage(conversation_id, message.id, "message", recipient_id);
         clearInputField();
+        scrollChatDown();
     }
 }
 

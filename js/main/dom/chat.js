@@ -84,6 +84,14 @@ export function makeChatVisible() {
     chat_container.classList.remove("invisible");
 }
 
+export function scrollChatDown() {
+    const chat_container = document.getElementById('messages-container');
+    if (chat_container) {
+        chat_container.scrollTop = chat_container.scrollHeight;
+    }
+}
+
+
 export function renderMessage(msg, user, recipient) {
     let avatarUrl;
     const container = document.getElementById('messages-container');
@@ -115,7 +123,7 @@ export function renderMessage(msg, user, recipient) {
             <img src="${avatarUrl}" class="avatar border border-2" alt="User avatar">
           </div>
           <div class="rounded-4 px-3 py-2 d-flex flex-column message-container ${statusClass}">
-            <span class="text-start w-100">${contentText}</span>
+            <span class="text-start w-100 text-break">${contentText}</span>
             <small class="secondary-text-style ms-2 text-end w-100">${time}</small>
           </div>
         </div>`;
