@@ -1,11 +1,17 @@
 #!/bin/sh
 
-API_URL="${API_URL:-http://127.0.0.1}"
+API_URL="${API_URL:-http://chatwave}"
 API_PORT="${API_PORT:-8000}"
+API_BASE_URL="${API_URL}:${API_PORT}"
+JWT_ACCESS_TOKEN_EXPIRES="${JWT_ACCESS_TOKEN_EXPIRES:-1209500}"
+LONG_POLLING_DELAY="${LONG_POLLING_DELAY:-1}"
+DEFAULT_MESSAGES_QUANTITY="${DEFAULT_MESSAGES_QUANTITY:-20}"
 
-# Соберём итоговый URL
-export API_BASE_URL="${API_URL}:${API_PORT}"
-
-envsubst < /usr/share/nginx/html/js/config.js.template > /usr/share/nginx/html/js/config.js
+cat <<EOF > /usr/share/nginx/html/js/config.js
+export const API_BASE_URL = "${API_BASE_URL}";
+export const API_TOKEN_LIFESPAN = "${JWT_ACCESS_TOKEN_EXPIRES}";
+export const LONG_POLLING_DELAY = "${LONG_POLLING_DELAY}";
+export const DEFAULT_MESSAGES_QUANTITY = "${DEFAULT_MESSAGES_QUANTITY}";
+EOF
 
 exec nginx -g 'daemon off;'
