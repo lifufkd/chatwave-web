@@ -348,7 +348,7 @@
         <div class="col-12 col-md-8 grid-split shadow rounded p-0 layers-style invisible" id="chat-container">
             <!-- Заголовок чата -->
             <div class="d-flex justify-content-between align-items-center px-2 py-3 interactive-style">
-                <div class="d-flex justify-content-center aligin-items-center pointer-on-hover" data-bs-toggle="modal" data-bs-target="#ProfileModal" id="toggle-user-profile">
+                <div class="d-flex justify-content-center aligin-items-center pointer-on-hover" id="toggle-user-profile">
                     <div class="flex-shrink-0 avatar-container mw-100 me-2">
                         <img 
                         src="https://via.placeholder.com/100" 
@@ -356,7 +356,7 @@
                         alt="User avatar"
                         id="chat-avatar">
                     </div>
-                    <div class="mt-1 ps-1">
+                    <div class="mt-1 ps-1" data-bs-toggle="modal" data-bs-target="#ProfileModal">
                         <h5 class="mb-0" id="chat-nickname">Loading...</h5>
                         <small class="accent-text-style" id="chat-last-online">Loading...</small>
                     </div>
@@ -397,9 +397,13 @@
 
         </div>
     </div>
+    <script src="https://unpkg.com/picmo@latest/dist/umd/index.js"></script>
+    <script src="https://unpkg.com/@picmo/popup-picker@latest/dist/umd/index.js"></script>
+
     <script src="js/theme.js"></script>
     <script src="js/main/touch_actions.js"></script>
     <script type="module" src="js/main/events.js"></script>
+    <script src="js/main/emoji.js"></script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
