@@ -1,90 +1,90 @@
 # 💬 ChatWave Web
 [🇷🇺 Русский](./README/README.ru.md) | [🇬🇧 English](./README.md)
 
-**ChatWave Web** — это современный и быстрый веб-фронтенд для мессенджера **ChatWave**, реализованный на JavaScript.  
-Простой интерфейс, мощные функции и гибкая настройка — всё, что нужно для общения в 2025 году. 🚀
+**ChatWave Web** — This is a modern and fast web frontend for the ChatWave messenger, implemented in JavaScript.  
+A simple interface, powerful features, and flexible customization are all you need to communicate in 2025. 🚀
 
 ![Chat Screenshot](./assests/banners/ChatWaveBanner.png)
 
 ---
 
-## 🌐 Возможности
+## 🌐 Opportunities
 
-### 📝 Регистрация
+### 📝 Registration
 
-- **Никнейм** — минимум **3 символа**
-- **Логин** — минимум **3 символа**
-- **Пароль** — минимум **8 символов**, обязательна:
-  - одна **прописная латинская** буква,
-  - одна **строчная латинская** буква,
-  - одна **цифра**
+- **Nickname** — minimum **3 characters**
+- **Login** — minimum **3 characters**
+- **Password** — minimum **8 characters**, required:
+- one **uppercase Latin** letter,
+- one **lowercase Latin** letter,
+- one **digit**
 
-### 🔐 Вход
+### 🔐 Entrance
 
-- **Логин**
-- **Пароль**
+- **Login**
+- **Password**
 
-### 🏠 Главная страница
+### 🏠 Home Page
 
-- 📥 Получение списка **личных чатов**
-- 🔍 **Поиск пользователей** (валидация: минимум 3 символа)
-- ➕ Создание **личных диалогов**
-- 👤 Просмотр и **редактирование своего профиля**:
-  - Аватар
-  - Никнейм
-  - Логин
-  - Личная информация (БИО)
-  - День рождения
-  - Дата/время последнего онлайна
-  - Дата/время создания аккаунта
-  - Дата/время последнего обновления
-- 🧑‍💼 Просмотр **чужих профилей**
-- 🧹 Очистка чатов
-- 🚪 Выход из чатов
-- ❌ Удаление аккаунта
+- 📥 Getting a list of **personal chats**
+- 🔍 **User search** (validation: minimum 3 characters)
+- ➕ Create **personal dialogues**
+- 👤 View and **edit your profile**:
+- Avatar
+- Nickname
+- Login
+- Personal information (BIO)
+- Birthday
+- Date/time of last online
+- Date/time of account creation
+- Date/time of the last update
+- 🧑‍💼 Viewing **other people's profiles**
+- 🧹 Clearing chats
+- 🚪 Log out of chats
+- ❌ Account deletion
 
-### 💬 Чат
+### 💬 Chat
 
-- 💌 Отображение сообщений:
-  - Контент (текст, фото, голос)
-  - Аватар отправителя
-  - Никнейм
-  - Дата и время отправки
-- ✍️ **Отправка**:
-  - Текстовых сообщений
-  - Фотографий
-  - Фото с подписью
-  - Голосовых сообщений
-- 🔄 **Получение** сообщений от собеседника
-- 🗑️ **Удаление** сообщений (своих и собеседника)
-- 🖊️ **Редактирование** своих сообщений (только текст)
+- 💌 Message display:
+  - Content (text, photo, voice)
+  - Sender's avatar
+  - Nickname
+  - Date and time of sending
+- ✍️ **Sending**:
+  - Text messages
+  - Photos
+  - Photos with caption
+  - Voice messages
+- 🔄 **Receiving** messages from the interlocutor
+- 🗑️ **Deleting** messages (your own and the other person's)
+- 🖊️ **Edit** your messages (text only)
 
 ---
 
-## ⚙️ Установка
+## ⚙️ Installation
 
-### 🔧 Вариант 1: Ручная установка
+### 🔧 Option 1: Manual installation
 
-1. Клонируйте репозиторий:
+1. Clone the repository:
    ```
    git clone https://github.com/lifufkd/chatwave-web.git
    cd chatwave-web
    ```
-2. Настройте конфигурацию в js/config.js:
+2. Set up the configuration in js/config.js:
    ```
    export const API_BASE_URL = "http://127.0.0.1:8000"; // адрес бэкенда
    export const API_TOKEN_LIFESPAN = 1209500;
    export const LONG_POLLING_DELAY = 1; // интервал long-polling запросов
    export const DEFAULT_MESSAGES_QUANTITY = 20;
    ```
-3. Запустите локальный сервер (например, с помощью Live Server или другого dev-сервера)
+3. Start a local server (for example, using a Live Server or another dev server)
 
-### 🐳 Вариант 2: Docker
-1. Скачайте готовый образ:
+### 🐳 Option 2: Docker
+1. Download the finished image:
 ```
 docker pull ghcr.io/lifufkd/chatwave-web:latest
 ```
-2. Запустите с нужными переменными окружения:
+2. Run with the necessary environment variables:
 ```
 docker run -d \
   -e API_URL=http://backend-host \
