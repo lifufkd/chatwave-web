@@ -4,7 +4,6 @@ const edgeThreshold = 80;
 const swipeThreshold = 50;
 
 document.addEventListener('touchstart', function (e) {
-    console.log(e.changedTouches);
     touchStartX = e.changedTouches[0].clientX;
   }, false);
   
@@ -18,13 +17,10 @@ function isAnyOffcanvasOpen() {
 }
   
 function handleSwipeGesture() {
-    console.log(1);
     const swipeDistance = touchEndX - touchStartX;
 
     if (Math.abs(swipeDistance) < swipeThreshold) return;
-    console.log(2);
     if (isAnyOffcanvasOpen()) return;
-    console.log(swipeDistance);
 
     // Свайп вправо от левого края
     if (swipeDistance > 0 && touchStartX <= edgeThreshold) {
