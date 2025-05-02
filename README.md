@@ -1,5 +1,5 @@
 # 💬 ChatWave Web
-[🇷🇺 Русский](./README/README.ru.md) | [🇬🇧 English](./README.md)
+[🇬🇧 English](./README.md) | [🇷🇺 Русский](./README/README.ru.md)
 
 **ChatWave Web** — This is a modern and fast web frontend for the ChatWave messenger, implemented in JavaScript.  
 A simple interface, powerful features, and flexible customization are all you need to communicate in 2025. 🚀
@@ -15,9 +15,9 @@ A simple interface, powerful features, and flexible customization are all you ne
 - **Nickname** — minimum **3 characters**
 - **Login** — minimum **3 characters**
 - **Password** — minimum **8 characters**, required:
-- one **uppercase Latin** letter,
-- one **lowercase Latin** letter,
-- one **digit**
+  - one **uppercase Latin** letter,
+  - one **lowercase Latin** letter,
+  - one **digit**
 
 ### 🔐 Entrance
 
@@ -30,14 +30,14 @@ A simple interface, powerful features, and flexible customization are all you ne
 - 🔍 **User search** (validation: minimum 3 characters)
 - ➕ Create **personal dialogues**
 - 👤 View and **edit your profile**:
-- Avatar
-- Nickname
-- Login
-- Personal information (BIO)
-- Birthday
-- Date/time of last online
-- Date/time of account creation
-- Date/time of the last update
+  - Avatar
+  - Nickname
+  - Login
+  - Personal information (BIO)
+  - Birthday
+  - Date/time of last online
+  - Date/time of account creation
+  - Date/time of the last update
 - 🧑‍💼 Viewing **other people's profiles**
 - 🧹 Clearing chats
 - 🚪 Log out of chats
