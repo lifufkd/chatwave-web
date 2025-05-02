@@ -25,6 +25,8 @@ const messages_container = document.getElementById('messages-container');
 
 let touchStartX = 0;
 let touchEndX = 0;
+const edgeThreshold = 30;
+const swipeThreshold = 50;
 export const scrollState = {
   loadCount: 1
 };
@@ -212,18 +214,24 @@ document.addEventListener('touchend', function (e) {
   handleSwipeGesture();
 }, false);
 
+function isAnyOffcanvasOpen() {
+  return document.querySelector('.offcanvas.show') !== null;
+}
+
 function handleSwipeGesture() {
   const swipeDistance = touchEndX - touchStartX;
-  const swipeThreshold = 50; // минимальное расстояние свайпа
 
   if (Math.abs(swipeDistance) < swipeThreshold) return;
+  if (isAnyOffcanvasOpen()) return;
 
-  if (swipeDistance > 0) {
-    // свайп вправо
+  // Свайп вправо от левого края
+  if (swipeDistance > 0 && touchStartX < edgeThreshold) {
     const settingsOffcanvas = new bootstrap.Offcanvas(document.getElementById('settingsOffcanvas'));
     settingsOffcanvas.show();
-  } else {
-    // свайп влево
+  }
+
+  // Свайп влево от правого края
+  else if (swipeDistance < 0 && touchStartX > window.innerWidth - edgeThreshold) {
     const dialogsOffcanvas = new bootstrap.Offcanvas(document.getElementById('dialogsOffcanvas'));
     dialogsOffcanvas.show();
   }
