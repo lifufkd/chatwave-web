@@ -206,6 +206,7 @@ openProfileBtn.addEventListener("click", () => {
 });
 
 document.addEventListener('touchstart', function (e) {
+  console.log(e.changedTouches);
   touchStartX = e.changedTouches[0].clientX;
 }, false);
 
