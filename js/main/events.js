@@ -23,7 +23,8 @@ const conversations_conteiner_mobile = document.getElementById('conversations-co
 const chat_container = document.getElementById('chat-container');
 const messages_container = document.getElementById('messages-container');
 
-
+let touchStartX = 0;
+let touchEndX = 0;
 export const scrollState = {
   loadCount: 1
 };
@@ -202,32 +203,28 @@ openProfileBtn.addEventListener("click", () => {
   }, { once: true });
 });
 
+document.addEventListener('touchstart', function (e) {
+  touchStartX = e.changedTouches[0].screenX;
+}, false);
 
+document.addEventListener('touchend', function (e) {
+  touchEndX = e.changedTouches[0].screenX;
+  handleSwipeGesture();
+}, false);
 
+function handleSwipeGesture() {
+  const swipeDistance = touchEndX - touchStartX;
+  const swipeThreshold = 50; // минимальное расстояние свайпа
 
-// todo: delete after dev
-document.addEventListener('keydown', (e) => {
-  if (e.ctrlKey && e.key.toLowerCase() === 'z') {
-    const offcanvasEl = document.getElementById('settingsOffcanvas');
-    const offcanvas = bootstrap.Offcanvas.getOrCreateInstance(offcanvasEl);
+  if (Math.abs(swipeDistance) < swipeThreshold) return;
 
-    if (offcanvasEl.classList.contains('show')) {
-      offcanvas.hide();
-    } else {
-      offcanvas.show();
-    }
+  if (swipeDistance > 0) {
+    // свайп вправо
+    const settingsOffcanvas = new bootstrap.Offcanvas(document.getElementById('settingsOffcanvas'));
+    settingsOffcanvas.show();
+  } else {
+    // свайп влево
+    const dialogsOffcanvas = new bootstrap.Offcanvas(document.getElementById('dialogsOffcanvas'));
+    dialogsOffcanvas.show();
   }
-});
-
-document.addEventListener('keydown', (e) => {
-  if (e.ctrlKey && e.key.toLowerCase() === 'x') {
-    const offcanvasEl = document.getElementById('dialogsOffcanvas');
-    const offcanvas = bootstrap.Offcanvas.getOrCreateInstance(offcanvasEl);
-
-    if (offcanvasEl.classList.contains('show')) {
-      offcanvas.hide();
-    } else {
-      offcanvas.show();
-    }
-  }
-});
+}
