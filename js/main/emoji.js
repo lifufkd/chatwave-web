@@ -1,5 +1,3 @@
-import { EmojiButton } from '@joeattardi/emoji-button';
-
 document.addEventListener('DOMContentLoaded', () => {
     const button = document.getElementById('emoji-button');
     const input = document.getElementById('chat-message-input');
