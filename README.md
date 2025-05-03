@@ -1,7 +1,7 @@
 # 💬 ChatWave Web
 [🇬🇧 English](./README.md) | [🇷🇺 Русский](./README/README.ru.md)
 
-**ChatWave Web** — This is a modern and fast web frontend for the ChatWave messenger, implemented in JavaScript.  
+**ChatWave Web** — This is a modern, fast and secure web frontend for the ChatWave messenger, implemented in JavaScript.  
 A simple interface, powerful features, and flexible customization are all you need to communicate in 2025. 🚀
 
 ![Chat Screenshot](./assests/banners/ChatWaveBanner.png)
@@ -77,10 +77,10 @@ A simple interface, powerful features, and flexible customization are all you ne
    export const LONG_POLLING_DELAY = 1; // интервал long-polling запросов
    export const DEFAULT_MESSAGES_QUANTITY = 20;
    ```
-3. Start a local server (for example, using a Live Server or another dev server)
+3. Start a web server (for example, using a Live Server or another dev server)
 
 ### 🐳 Option 2: Docker
-1. Download the finished image:
+1. Download the docker image:
 ```
 docker pull ghcr.io/lifufkd/chatwave-web:latest
 ```
@@ -89,7 +89,6 @@ docker pull ghcr.io/lifufkd/chatwave-web:latest
 docker run -d \
   -e API_URL=http://backend-host \
   -e API_PORT=8000 \
-  -e API_BASE_URL=http://backend-host:8000 \
   -e JWT_ACCESS_TOKEN_EXPIRES=1209500 \
   -e LONG_POLLING_DELAY=1 \
   -e DEFAULT_MESSAGES_QUANTITY=20 \
