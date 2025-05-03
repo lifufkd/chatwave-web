@@ -8,9 +8,9 @@ const themeIconMobile = document.getElementById('theme-icon-mobile');
 
 function setTheme(theme) {
   themeLink.href = theme === 'dark' ? '../styles/themes/dark.css' : '../styles/themes/light.css';
-  logo.src = theme === 'dark' ? '../assests/logo-dark.png' : '../assests/logo-light.png';
+  logo.src = theme === 'dark' ? '../assests/logo-dark.svg' : '../assests/logo-light.svg';
   if (logoMobile) {
-    logoMobile.src = theme === 'dark' ? '../assests/logo-dark.png' : '../assests/logo-light.png';
+    logoMobile.src = theme === 'dark' ? '../assests/logo-dark.svg' : '../assests/logo-light.svg';
   }
   UpdateThemeTogglerIcon(themeIcon, theme);
   if (themeIconMobile) {
