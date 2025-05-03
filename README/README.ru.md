@@ -1,4 +1,4 @@
-[🇷🇺 Русский](./README/README.ru.md) | [🇬🇧 English](./README.md)
+[🇷🇺 Русский](./README/README.ru.md) | [🇬🇧 English](../README.md)
 
 
 <p align="center">
