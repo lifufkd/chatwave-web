@@ -4,7 +4,7 @@
 **ChatWave Web** — это современный и быстрый веб-фронтенд для мессенджера **ChatWave**, реализованный на JavaScript.  
 Простой интерфейс, мощные функции и гибкая настройка — всё, что нужно для общения в 2025 году. 🚀
 
-![Chat Screenshot](./assests/banners/ChatWaveBanner.png)
+![Chat Screenshot](../assests/banners/ChatWaveBanner.png)
 
 ---
 
@@ -89,7 +89,6 @@ docker pull ghcr.io/lifufkd/chatwave-web:latest
 docker run -d \
   -e API_URL=http://backend-host \
   -e API_PORT=8000 \
-  -e API_BASE_URL=http://backend-host:8000 \
   -e JWT_ACCESS_TOKEN_EXPIRES=1209500 \
   -e LONG_POLLING_DELAY=1 \
   -e DEFAULT_MESSAGES_QUANTITY=20 \
