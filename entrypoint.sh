@@ -14,7 +14,6 @@ export const LONG_POLLING_DELAY = ${LONG_POLLING_DELAY};
 export const DEFAULT_MESSAGES_QUANTITY = ${DEFAULT_MESSAGES_QUANTITY};
 EOF
 
-# Генерация HTTPS-блока
 if [ -n "$SSL_CERT_PATH" ] && [ -n "$SSL_CERT_KEY" ]; then
   HTTPS_BLOCK=$(cat <<EOF
 server {
@@ -37,7 +36,12 @@ else
   HTTPS_BLOCK=""
 fi
 
-# Подстановка HTTPS-блока без envsubst (через sed)
-sed "s|{{HTTPS_BLOCK}}|$HTTPS_BLOCK|" /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
+# Safe substitution with awk
+awk -v block="$HTTPS_BLOCK" '
+{
+  gsub(/{{HTTPS_BLOCK}}/, block)
+  print
+}' /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
 
+# Run nginx
 exec nginx -g 'daemon off;'
