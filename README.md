@@ -91,6 +91,7 @@ docker pull ghcr.io/lifufkd/chatwave-web:latest
 ```
 2. Run with the necessary environment variables:
 ```
+# HTTP (no ssl) mode
 docker run -d \
   -e API_URL=http://backend-host \
   -e API_PORT=8000 \
@@ -98,5 +99,18 @@ docker run -d \
   -e LONG_POLLING_DELAY=1 \
   -e DEFAULT_MESSAGES_QUANTITY=20 \
   -p 8080:80 \
+  ghcr.io/lifufkd/chatwave-web:latest
+
+# HTTPS (ssl) mode. You need to specify path to folder with ssl certs and change this line.
+docker run -d \
+  -e API_URL=http://backend-host \
+  -e API_PORT=8000 \
+  -e SSL_CERT_PATH=/cert/cert.pem \
+  -e SSL_CERT_KEY=/cert/cert.key \
+  -e JWT_ACCESS_TOKEN_EXPIRES=1209500 \
+  -e LONG_POLLING_DELAY=1 \
+  -e DEFAULT_MESSAGES_QUANTITY=20 \
+  -p 8080:80 \
+  -v /path/to/folder/with/certs:/cert:ro \
   ghcr.io/lifufkd/chatwave-web:latest
 ```
