@@ -1,10 +1,15 @@
-# 💬 ChatWave Web
 [🇬🇧 English](./README.md) | [🇷🇺 Русский](./README/README.ru.md)
+
+<p align="center">
+  <img src="assests/logo-dark.svg" alt="ChatWave logo" width="200"/>
+</p>
+
+# 💬 ChatWave Web
 
 **ChatWave Web** — This is a modern, fast and secure web frontend for the ChatWave messenger, implemented in JavaScript.  
 A simple interface, powerful features, and flexible customization are all you need to communicate in 2025. 🚀
 
-![Chat Screenshot](./assests/banners/ChatWaveBanner.png)
+![Chat Screenshot](./assests/ChatWaveBanner.png)
 
 ---
 
