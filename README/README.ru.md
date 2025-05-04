@@ -88,17 +88,17 @@ docker pull ghcr.io/lifufkd/chatwave-web:latest
 ```
 2. Запустите с нужными переменными окружения:
 ```
-# HTTP (no ssl)
+# HTTP (no ssl) mode
 docker run -d \
   -e API_URL=http://backend-host \
   -e API_PORT=8000 \
   -e JWT_ACCESS_TOKEN_EXPIRES=1209500 \
   -e LONG_POLLING_DELAY=1 \
   -e DEFAULT_MESSAGES_QUANTITY=20 \
-  -p 8080:80 \
+  -p 80:80 \
   ghcr.io/lifufkd/chatwave-web:latest
 
-# HTTPS (ssl). Вам нужно указать путь до папки с SSL сертификатами и изменить соответствующую строку.
+# HTTPS (ssl) mode. You need to specify path to folder with ssl certs and change this line.
 docker run -d \
   -e API_URL=http://backend-host \
   -e API_PORT=8000 \
@@ -107,7 +107,8 @@ docker run -d \
   -e JWT_ACCESS_TOKEN_EXPIRES=1209500 \
   -e LONG_POLLING_DELAY=1 \
   -e DEFAULT_MESSAGES_QUANTITY=20 \
-  -p 8080:80 \
+  -p 80:80 \
+  -p 443:443 \
   -v /path/to/folder/with/certs:/cert:ro \
   ghcr.io/lifufkd/chatwave-web:latest
 ```
