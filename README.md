@@ -98,7 +98,7 @@ docker run -d \
   -e JWT_ACCESS_TOKEN_EXPIRES=1209500 \
   -e LONG_POLLING_DELAY=1 \
   -e DEFAULT_MESSAGES_QUANTITY=20 \
-  -p 8080:80 \
+  -p 80:80 \
   ghcr.io/lifufkd/chatwave-web:latest
 
 # HTTPS (ssl) mode. You need to specify path to folder with ssl certs and change this line.
@@ -110,7 +110,8 @@ docker run -d \
   -e JWT_ACCESS_TOKEN_EXPIRES=1209500 \
   -e LONG_POLLING_DELAY=1 \
   -e DEFAULT_MESSAGES_QUANTITY=20 \
-  -p 8080:80 \
+  -p 80:80 \
+  -p 443:443 \
   -v /path/to/folder/with/certs:/cert:ro \
   ghcr.io/lifufkd/chatwave-web:latest
 ```
