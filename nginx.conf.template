@@ -1,6 +1,3 @@
-env SSL_CERT_PATH;
-env SSL_CERT_KEY;
-
 events {}
 
 http {
@@ -8,16 +5,9 @@ http {
     default_type  application/octet-stream;
 
     server {
-        listen       80;
-        server_name  localhost;
-
-        root /usr/share/nginx/html;
-        index index.html;
-
-        location / {
-            try_files $uri $uri/ =404;
-        }
+        listen 80;
+        ${SSL_REDIRECT_OR_PROXY}
     }
 
-    {{HTTPS_BLOCK}}
+    ${SSL_SERVER_BLOCK}
 }

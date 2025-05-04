@@ -15,33 +15,39 @@ export const DEFAULT_MESSAGES_QUANTITY = ${DEFAULT_MESSAGES_QUANTITY};
 EOF
 
 if [ -n "$SSL_CERT_PATH" ] && [ -n "$SSL_CERT_KEY" ]; then
-  HTTPS_BLOCK=$(cat <<EOF
-server {
-    listen 443 ssl;
-    server_name localhost;
+  export SSL_REDIRECT_OR_PROXY="return 301 https://\$host\$request_uri;"
 
-    ssl_certificate     $SSL_CERT_PATH;
-    ssl_certificate_key $SSL_CERT_KEY;
+  export SSL_SERVER_BLOCK="
+    server {
+        listen 443 ssl;
+        server_name localhost;
 
-    root /usr/share/nginx/html;
-    index index.html;
+        ssl_certificate     $SSL_CERT_PATH;
+        ssl_certificate_key $SSL_CERT_KEY;
 
-    location / {
-        try_files \$uri \$uri/ =404;
+        root /usr/share/nginx/html;
+        index index.html;
+
+        location / {
+            try_files \$uri \$uri/ =404;
+        }
     }
-}
-EOF
-)
+  "
 else
-  HTTPS_BLOCK=""
+  export SSL_REDIRECT_OR_PROXY="
+  server_name  localhost;
+
+  root /usr/share/nginx/html;
+  index index.html;
+
+  location / {
+      try_files $uri $uri/ =404;
+  }"
+  
+  export SSL_SERVER_BLOCK=""
 fi
 
-# Safe substitution with awk
-awk -v block="$HTTPS_BLOCK" '
-{
-  gsub(/{{HTTPS_BLOCK}}/, block)
-  print
-}' /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
+envsubst "$(env | cut -d= -f1 | sed 's/^/$/')" < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
 
 # Run nginx
 exec nginx -g 'daemon off;'
