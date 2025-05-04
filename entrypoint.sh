@@ -35,15 +35,16 @@ if [ -n "$SSL_CERT_PATH" ] && [ -n "$SSL_CERT_KEY" ]; then
   "
 else
   export SSL_REDIRECT_OR_PROXY="
-  server_name  localhost;
+    server_name  localhost;
 
-  root /usr/share/nginx/html;
-  index index.html;
+    root /usr/share/nginx/html;
+    index index.html;
 
-  location / {
-      try_files $uri $uri/ =404;
-  }"
-  
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+  "
+
   export SSL_SERVER_BLOCK=""
 fi
 
