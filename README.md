@@ -9,7 +9,7 @@
 **ChatWave Web** — This is a modern, fast and secure web frontend for the ChatWave messenger, implemented in JavaScript.  
 A simple interface, powerful features, and flexible customization are all you need to communicate in 2025. 🚀
 
-![Chat Screenshot](./assests/banners/ChatWaveBanner.png)
+![Chat Screenshot](./assests/ChatWaveBanner.png)
 
 ---
 
