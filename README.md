@@ -64,7 +64,17 @@ A simple interface, powerful features, and flexible customization are all you ne
 - 🗑️ **Deleting** messages (your own and the other person's)
 - 🖊️ **Edit** your messages (text only)
 
----
+## 📈 Development Roadmap
+
+Planned and implemented features to improve **ChatWave**:
+
+| Feature                                   | Description                                                  | Status     |
+|-------------------------------------------|--------------------------------------------------------------|------------|
+| 🖼️ Image Viewer                           | Open images in full size                                     | 🔄 In Progress |
+| 🔔 New Message Sound                      | Play sound when a new message arrives                        | ⏳ Planned |
+| 📎 Media Message Support                  | Sending various media types (e.g., files, videos)            | ⏳ Planned |
+| 📞 Voice & Video Calls                    | Real-time voice and video communication                      | ⏳ Planned |
+| 🔐 HTTPS Support                          | Secure connection via self-signed and Let's Encrypt certs    | ✅ Done    |
 
 ## ⚙️ Installation
 
@@ -77,9 +87,9 @@ A simple interface, powerful features, and flexible customization are all you ne
    ```
 2. Set up the configuration in js/config.js:
    ```
-   export const API_BASE_URL = "http://127.0.0.1:8000"; // адрес бэкенда
+   export const API_BASE_URL = "http://127.0.0.1:8000";
    export const API_TOKEN_LIFESPAN = 1209500;
-   export const LONG_POLLING_DELAY = 1; // интервал long-polling запросов
+   export const LONG_POLLING_DELAY = 1;
    export const DEFAULT_MESSAGES_QUANTITY = 20;
    ```
 3. Start a web server (for example, using a Live Server or another dev server)
